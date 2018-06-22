@@ -13,6 +13,7 @@
         <module>restTemplate</module>
         <module>spi</module>
         <module>spi-api</module>
+        <module>dubbo-parise</module>
     </modules>
 
 
