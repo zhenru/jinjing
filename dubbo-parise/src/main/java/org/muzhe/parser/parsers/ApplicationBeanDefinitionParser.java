@@ -3,16 +3,20 @@ package org.muzhe.parser.parsers;
 import com.google.common.base.Strings;
 import com.sun.org.glassfish.gmbal.ManagedObject;
 import lombok.Getter;
+import org.muzhe.parser.bean.Application;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
+import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
+import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 /**
  * @author muzhe-wang on  18-6-22 下午6:28.
  */
-@Getter
-public class ApplicationBeanDefinitionParser  extends AbstractBeanDefinitionParser {
+
+public class ApplicationBeanDefinitionParser  extends AbstractSingleBeanDefinitionParser {
 
     private final Class<?> beanClass;
 
@@ -24,16 +28,26 @@ public class ApplicationBeanDefinitionParser  extends AbstractBeanDefinitionPars
     }
 
     @Override
-    protected AbstractBeanDefinition parseInternal(Element element, ParserContext parserContext) {
+    protected  Class getBeanClass(Element element){
+        return Application.class;
+    }
+
+    @Override
+    protected void doParse(Element element, BeanDefinitionBuilder beanDefinitionBuilder){
         String id = element.getAttribute("id");
         String name = element.getAttribute("name");
         String version = element.getAttribute("version");
 
-        if (Strings.isNullOrEmpty(id)){
-
+        if (!Strings.isNullOrEmpty(id)){
+            beanDefinitionBuilder.addPropertyValue("id" , id);
         }
-
-
-        return null;
+        if (!Strings.isNullOrEmpty(name)){
+            beanDefinitionBuilder.addPropertyValue("name" , name);
+        }
+        if (!Strings.isNullOrEmpty(version)){
+            beanDefinitionBuilder.addPropertyValue("version" , version);
+        }
     }
+
+
 }
