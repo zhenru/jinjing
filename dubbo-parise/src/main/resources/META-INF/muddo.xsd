@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<xsd:schema xmlns="http://muddo.muzhe.org/schema/mudubbo"
+<xsd:schema xmlns="http://muddo.muzhe.org/schema/muddo"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:beans="http://www.springframework.org/schema/beans"
-            xmlns:tool="http://www.springframework.org/schema/tool"
             targetNamespace="http://muddo.muzhe.org/schema/muddo">
 
     <xsd:complexType name="applicationType">

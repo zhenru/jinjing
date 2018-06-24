@@ -1,0 +1,18 @@
+package org.muzhe.parser.namespaceHandlers;
+
+import org.muzhe.parser.bean.Application;
+import org.muzhe.parser.parsers.ApplicationBeanDefinitionParser;
+import org.muzhe.parser.parsers.RegistryBeanDefinitionParser;
+import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
+
+/**
+ * 这个主要是对命名空间进行加载的对象
+ * @author muzhe-wang on  18-6-24 上午11:59.
+ */
+public class MuddoNameSpaceHandler extends NamespaceHandlerSupport {
+
+    public void init() {
+        registerBeanDefinitionParser("application" , new ApplicationBeanDefinitionParser(Application.class, true));
+        registerBeanDefinitionParser("registry" , new RegistryBeanDefinitionParser());
+    }
+}

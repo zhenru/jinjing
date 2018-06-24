@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:muddo="http://muddo.muzhe.org/schema/muddo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://muddo.muzhe.org/schema/muddo
+       http://muddo.muzhe.org/schema/muddo.xsd">
+
+    <muddo:application name="applicationTest" id="nihao" version="0.0.1"/>
+    <muddo:registry address="192.168.0.1" id="staging"  port="90"/>
+
+</beans>
