@@ -6,7 +6,6 @@ import org.muzhe.parser.parsers.RegistryBeanDefinitionParser;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
 /**
- * 这个主要是对命名空间进行加载的对象
  * @author muzhe-wang on  18-6-24 上午11:59.
  */
 public class MuddoNameSpaceHandler extends NamespaceHandlerSupport {

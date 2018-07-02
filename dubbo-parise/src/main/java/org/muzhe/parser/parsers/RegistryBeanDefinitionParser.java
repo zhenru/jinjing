@@ -11,7 +11,6 @@ import org.w3c.dom.Element;
  */
 public class RegistryBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
 
-
     /**
      * 返回当前的xsd对应的　Class对象。
      * @param element
