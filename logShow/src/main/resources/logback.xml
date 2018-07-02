@@ -43,6 +43,7 @@
         </rollingPolicy>
     </appender>
 
+    <!--用户日志-->
     <appender name="userLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>/home/muzhe/temp/rubish/user_log.log</File>
         <encoder>
@@ -133,9 +134,6 @@
         <appender-ref ref ="logfile"/>
     </appender>
 
-
-
-　　　
     <logger name="user" additivity="false" level="INFO">
         <appender-ref ref="userLog"/>
     </logger>
