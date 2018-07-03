@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+       default-lazy-init="false">
+
+
+    <dubbo:application name="cif-core" owner="programmer" organization="xiaomi.cif"/>
+    <dubbo:registry address="zookeeper://zk1.staging.srv:2181?backup=zk2.staging.srv:2181,zk3.staging.srv:2181,zk4.staging.srv:2181,zk5.staging.srv:2181"/>
+    <dubbo:protocol name="dubbo"/>
+    <dubbo:consumer check="false"/>
+
+
+
+
+
+
+    <!--服务发布-->
+    <dubbo:reference  id="echoService2" interface="org.muzhe.test.EchoService" version = "0.0.2"/>
+    <dubbo:reference  id="echoService1" interface="org.muzhe.test.EchoService" version = "0.0.1"/>
+
+
+
+</beans>

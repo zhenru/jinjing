@@ -67,6 +67,7 @@
             <Pattern>[%date] [%-5level] %c{40} %line --%mdc{client} [%X{TRACE_LOG_ID}] %msg%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
+        <!--todo 使用filter实现不同级别的日志会被打印到相对应的日志文件中。 muzhe-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <onMatch>ACCEPT</onMatch>
@@ -134,6 +135,8 @@
         <appender-ref ref ="logfile"/>
     </appender>
 
+    <!--todo 这里的name需要和LoggerFactory.getLogger("name")相同或者是前置匹配 muzhe-->
+    <!--todo 这里使用　additity属性主要的功能是这个日志只会做当前的appender中打印出来，不会在其root日志级别的日志中打印出来日志当中打印。 muzhe-->
     <logger name="user" additivity="false" level="INFO">
         <appender-ref ref="userLog"/>
     </logger>
@@ -142,7 +145,7 @@
         <appender-ref ref="sysLog"/>
     </logger>
 
-    <!-- 输出到控制台和文件，可定义更多的 Appender -->
+    <!-- 输出到控制台和文件，可定义更多的 Appender 　这个是最后的地址了，所有的都会被打印到这里面来-->
     <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="errorLog"/>
