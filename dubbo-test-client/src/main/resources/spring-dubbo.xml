@@ -10,9 +10,8 @@
 
 
     <dubbo:application name="cif-core" owner="programmer" organization="xiaomi.cif"/>
-    <dubbo:registry address="zookeeper://zk1.staging.srv:2181?backup=zk2.staging.srv:2181,zk3.staging.srv:2181,zk4.staging.srv:2181,zk5.staging.srv:2181"/>
+    <dubbo:registry address="zookeeper://localhost:2181"/>
     <dubbo:protocol name="dubbo"/>
-    <dubbo:consumer check="false"/>
 
 
 
@@ -21,7 +20,6 @@
 
     <!--服务发布-->
     <dubbo:reference  id="echoService2" interface="org.muzhe.test.EchoService" version = "0.0.2"/>
-    <dubbo:reference  id="echoService1" interface="org.muzhe.test.EchoService" version = "0.0.1"/>
 
 
 

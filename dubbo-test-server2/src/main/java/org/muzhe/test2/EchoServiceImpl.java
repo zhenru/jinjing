@@ -10,7 +10,7 @@ import org.muzhe.test.EchoService;
 @Slf4j
 public class EchoServiceImpl implements EchoService {
     public String sayHello(String name) {
-        log.error("你好呀这个是一个测试的实现");
+        log.error("echo 2");
         return "hello world " + name;
     }
 }
