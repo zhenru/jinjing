@@ -11,15 +11,9 @@ public class ConsumerTest {
 
 
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("spring-dubbo.xml");
-
-        EchoService echoService2 = classPathXmlApplicationContext.getBean("echoService2", EchoService.class);
-        EchoService echoService1 = classPathXmlApplicationContext.getBean("echoService1", EchoService.class);
-
+        EchoService echoService1 = classPathXmlApplicationContext.getBean("echoService2", EchoService.class);
         String zhangsan = echoService1.sayHello("张三");
         System.out.println(zhangsan);
-        String lisi = echoService2.sayHello("lisi");
-        System.out.println(lisi);
-
 
     }
 }

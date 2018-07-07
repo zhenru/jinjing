@@ -9,9 +9,9 @@
        default-lazy-init="false">
 
 
-    <dubbo:application name="cif-core2" owner="programmer" organization="xiaomi.cif"/>
-    <dubbo:registry address="zookeeper://zk1.staging.srv:2181?backup=zk2.staging.srv:2181,zk3.staging.srv:2181,zk4.staging.srv:2181,zk5.staging.srv:2181"/>
-    <dubbo:protocol name="dubbo"/>
+    <dubbo:application name="cif-core2" />
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:protocol name="dubbo" port="19743"/>
     <dubbo:consumer check="false"/>
 
 
