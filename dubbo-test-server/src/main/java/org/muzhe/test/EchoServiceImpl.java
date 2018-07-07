@@ -12,4 +12,6 @@ public class EchoServiceImpl implements EchoService {
         log.error("你好呀这个是一个测试的实现");
         return "hello world " + name;
     }
+
+
 }
