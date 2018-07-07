@@ -21,6 +21,8 @@
         <module>dubbo-test-server</module>
         <module>dubbo-test-server2</module>
         <module>dubbo-test-client</module>
+        <module>dubbo-log-web-test</module>
+        <module>dubbo-log-spring-mvc-test</module>
     </modules>
 
 

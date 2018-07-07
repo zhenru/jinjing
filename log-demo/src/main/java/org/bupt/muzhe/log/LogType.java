@@ -79,6 +79,7 @@ public class LogType {
 
         try {
 
+            throw new RuntimeException();
             //bizz code
 
         } catch (IOException ex) {
