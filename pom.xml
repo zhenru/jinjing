@@ -8,6 +8,7 @@
     <artifactId>jinjing</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>hystrix</module>
         <module>restTemplate</module>
@@ -21,8 +22,8 @@
         <module>dubbo-test-server</module>
         <module>dubbo-test-server2</module>
         <module>dubbo-test-client</module>
-        <module>dubbo-log-web-test</module>
-        <module>dubbo-log-spring-mvc-test</module>
+        <module>algorithm</module>
+        <module>dp</module>
     </modules>
 
 
