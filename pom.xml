@@ -24,6 +24,7 @@
         <module>dubbo-test-client</module>
         <module>algorithm</module>
         <module>dp</module>
+        <module>gc</module>
     </modules>
 
 
