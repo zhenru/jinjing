@@ -23,6 +23,7 @@
         <module>dubbo-test-client</module>
         <module>dubbo-log-web-test</module>
         <module>dubbo-log-spring-mvc-test</module>
+        <module>webtest</module>
     </modules>
 
 
