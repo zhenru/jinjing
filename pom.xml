@@ -25,6 +25,9 @@
         <module>algorithm</module>
         <module>dp</module>
         <module>gc</module>
+        <module>sys</module>
+        <module>jvm</module>
+        <module>java8</module>
     </modules>
 
 

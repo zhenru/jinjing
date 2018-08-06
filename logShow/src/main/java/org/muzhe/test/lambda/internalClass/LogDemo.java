@@ -1,8 +1,5 @@
-package org.muzhe.test.demo;
+package org.muzhe.test.lambda.internalClass;
 
-import org.muzhe.test.log.FeatchLog;
-import org.muzhe.test.log.ShowLog;
-import org.muzhe.test.log.UserLogger;
 import org.muzhe.test.loggers.LogFileNameEnum;
 import org.muzhe.test.loggers.LogUtils;
 import org.slf4j.Logger;
