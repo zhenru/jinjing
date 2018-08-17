@@ -11,7 +11,6 @@
 
     <modules>
         <module>hystrix</module>
-        <module>restTemplate</module>
         <module>spi</module>
         <module>spi-api</module>
         <module>dubbo-parise</module>
@@ -28,6 +27,9 @@
         <module>sys</module>
         <module>jvm</module>
         <module>java8</module>
+        <module>viewTemplate</module>
+        <module>spirng-cache</module>
+        <module>common</module>
     </modules>
 
 

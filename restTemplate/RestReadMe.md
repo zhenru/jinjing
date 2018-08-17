@@ -1,2 +1,0 @@
-##RestTemplate
-这个是Spring封装的RestTemplate对象，这个对象主要是访问了Http请求的实现。
