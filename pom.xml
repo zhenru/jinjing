@@ -21,9 +21,12 @@
         <module>dubbo-test-server</module>
         <module>dubbo-test-server2</module>
         <module>dubbo-test-client</module>
+        <module>dubbo-log-web-test</module>
+        <module>webtest</module>
         <module>algorithm</module>
         <module>dp</module>
         <module>gc</module>
+        <module>ModelTemplate</module>
         <module>sys</module>
         <module>jvm</module>
         <module>java8</module>
