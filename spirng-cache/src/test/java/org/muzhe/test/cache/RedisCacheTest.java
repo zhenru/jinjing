@@ -2,12 +2,11 @@ package org.muzhe.test.cache;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.muzhe.test.muzheCache.cache.RedisCache;
 
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.*;
 
 /**
  * @author muzhe-wang on  18-8-16 下午3:13.

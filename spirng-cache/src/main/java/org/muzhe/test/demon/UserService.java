@@ -9,11 +9,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserService {
 
-    @Cacheable(value = "muzhe-redis", key = "#user.age")
-    public String saveUser(User user) {
+    @Cacheable(value = "muzhe-redis", key = "1234")
+    public User saveUser(String name) {
 
-        System.out.println("call the user " + user);
-        return user.toString();
+        System.out.println("call the user " + name);
+        User user = new User();
+        user.setId(12L);
+        user.setAge(32);
+        user.setName("张三");
+        return user;
 
     }
 

@@ -1,4 +1,4 @@
-package org.muzhe.test.cache;
+package org.muzhe.test.muzheCache.cache;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCommands;
