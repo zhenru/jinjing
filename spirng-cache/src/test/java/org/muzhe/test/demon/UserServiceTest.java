@@ -22,9 +22,40 @@ public class UserServiceTest extends LocalSpringBaseTest {
         user.setAge(32);
         user.setName("你好");
 
-        userService.saveUser("wangwu");
+        userService.saveUser(12, "张三", Boolean.FALSE);
         System.out.println("完成了功能的测试");
-        userService.saveUser("李四");
+        userService.saveUser(12, "张三", Boolean.FALSE);
+
+    }
+
+    @Test
+    public void testQueryStudent() {
+
+        String studentId = "student001";
+        Student student = userService.queryStudentById(studentId);
+        System.out.println(student);
+    }
+
+    @Test
+    public void testQueryStudent2() {
+
+        String studentId = "student002";
+        Student student = userService.queryStudentById(studentId);
+        System.out.println(student);
+    }
+
+    @Test
+    public void testQueryStudent3() {
+
+        String studentId = "student003";
+        Student student = userService.queryStudentById(studentId);
+        Student student1 = userService.queryStudentById(studentId);
+        Student student2= userService.queryStudentById(studentId);
+
+        System.out.println(student);
+        System.out.println(student1);
+        System.out.println(student2);
+
 
     }
 }

@@ -10,7 +10,7 @@
     <cache:annotation-driven/>
 
 
-    <bean id="defaultCache" class="org.muzhe.test.bean.DefaultSpringRedisCache"/>
+    <bean id="defaultCache" class="org.muzhe.test.muzheCache.DefaultSpringRedisCache"/>
 
     <bean id="userService" class="org.muzhe.test.demon.UserService"/>
 

@@ -3,6 +3,7 @@ package org.muzhe.test.muzheCache;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.muzhe.test.demon.Student;
 import org.muzhe.test.demon.User;
 
 /**
@@ -12,7 +13,9 @@ import org.muzhe.test.demon.User;
 @AllArgsConstructor
 public enum CacheRegistryEnum implements CacheRegistry {
     TEST(1, "测试的缓存", "muzhe.test", false, new Class[]{Integer.class, String.class, Boolean.class}, "测试的用户信息的类型", new TypeReference<User>() {
-    }, "用户信息", 0);
+    }, "用户信息", 0),
+    STUDENT(2, "学生缓存", "muzhe.test.student", false, new Class[]{String.class}, "学生缓存，以学号为唯一标识", new TypeReference<Student>() {
+    }, "学生标识", -1);
 
     /**
      * cache的类型
@@ -47,7 +50,7 @@ public enum CacheRegistryEnum implements CacheRegistry {
     /**
      * 返回结果
      */
-    private TypeReference resultType;
+    private TypeReference valueType;
 
     /**
      * 结果描述信息

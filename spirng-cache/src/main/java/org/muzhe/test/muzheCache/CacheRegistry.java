@@ -57,7 +57,7 @@ public interface CacheRegistry {
      *
      * @return
      */
-    TypeReference getResultType();
+    TypeReference getValueType();
 
     /**
      * 获取到结果描述信息

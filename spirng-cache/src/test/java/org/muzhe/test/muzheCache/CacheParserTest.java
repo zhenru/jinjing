@@ -2,16 +2,13 @@ package org.muzhe.test.muzheCache;
 
 import org.junit.Test;
 import org.muzhe.test.demon.User;
-import org.springframework.test.annotation.Rollback;
-
-import static org.junit.Assert.*;
 
 /**
  * @author muzhe-wang on  18-8-21 上午11:16.
  */
 public class CacheParserTest {
 
-    private CacheParser cacheParser = new DefaultCacheParser();
+    private CacheParser cacheParser = new CacheParser();
 
     private int age = 12;
     private String name = "张三";
