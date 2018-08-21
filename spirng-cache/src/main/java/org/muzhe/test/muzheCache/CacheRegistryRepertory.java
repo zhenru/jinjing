@@ -60,5 +60,8 @@ public class CacheRegistryRepertory {
         assertTrue(!CACHE_REGISTRY_SET.contains(cacheRegistry), () -> new LocalException("cache不能重复注册"));
         assertTrue(!CACHE_TYPE_SET.contains(cacheRegistry.getType()), () -> new LocalException("cache type不能重复"));
         assertTrue(!CACHE_REGISTRY_MAP.containsKey(cacheRegistry.getKeyPrefix()), () -> new LocalException("prefix不能为空"));
+        if (cacheRegistry.getMultiKey()) {
+            assertTrue(cacheRegistry.getParameters().length > 1, () -> new LocalException("非法的cacheKey"));
+        }
     }
 }

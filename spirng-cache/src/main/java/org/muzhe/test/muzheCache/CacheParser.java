@@ -2,6 +2,7 @@ package org.muzhe.test.muzheCache;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
+import lombok.Data;
 import org.apache.commons.lang.StringUtils;
 import org.muzhe.test.muzheCache.exceptions.LocalException;
 import org.muzhe.test.muzheCache.util.JSONUtil;
@@ -108,6 +109,25 @@ public class CacheParser {
     }
 
     /**
+     * 根据cacheKey生成　多关键字的key
+     * @param cacheKey          数据库的缓存
+     * @return                  返回多个缓存
+     */
+    public static Pair generateMultiKey(String cacheKey){
+
+        CacheRegistry cacheRegistry = parseCacheRegistry(cacheKey);
+        assertTrue(cacheRegistry.getMultiKey() ,() -> new LocalException("非法cacheKey"));
+
+        int multiKeyIndex = cacheKey.lastIndexOf(SEPERATOR);
+        String key = cacheKey.substring(0, multiKeyIndex);
+        String field = cacheKey.substring(multiKeyIndex + 1);
+        Pair pair  = new Pair();
+        pair.setKey(key);
+        pair.setField(field);
+        return pair;
+    }
+
+    /**
      * 从cacheKey中获取到前缀
      * 其中第一个元素是前缀
      *
@@ -130,5 +150,18 @@ public class CacheParser {
         for (int i = 0; i < parameters.length; i++) {
             assertTrue(params[i].getClass().equals(parameters[i]), () -> new LocalException("格式不合法"));
         }
+    }
+
+    @Data
+    public  static class Pair{
+        /**
+         * 缓存的key
+         */
+        private String key;
+
+        /**
+         * map的key
+         */
+        private String field;
     }
 }

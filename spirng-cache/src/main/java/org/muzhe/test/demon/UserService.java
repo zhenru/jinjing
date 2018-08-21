@@ -38,4 +38,17 @@ public class UserService {
 
     }
 
+    @Cacheable(value = "redis-cache", key = "T(org.muzhe.test.muzheCache.CacheParser).parseCacheKey(T(org.muzhe.test.muzheCache.CacheRegistryEnum).CAT_TYPE,#type, #Id)")
+    public Cat queryCatByType(String type, String Id) {
+
+        Cat cat = new Cat();
+        cat.setType("1");
+        cat.setId("cat001");
+        cat.setName("catName");
+        cat.setColor("red");
+        return cat;
+
+    }
+
+
 }

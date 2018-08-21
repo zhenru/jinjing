@@ -50,12 +50,21 @@ public class UserServiceTest extends LocalSpringBaseTest {
         String studentId = "student003";
         Student student = userService.queryStudentById(studentId);
         Student student1 = userService.queryStudentById(studentId);
-        Student student2= userService.queryStudentById(studentId);
+        Student student2 = userService.queryStudentById(studentId);
 
         System.out.println(student);
         System.out.println(student1);
         System.out.println(student2);
 
 
+    }
+
+    @Test
+    public void testQueryCat() {
+
+        String type = "1";
+        String id = "catId";
+        Cat cat = userService.queryCatByType(type, id);
+        System.out.println(cat);
     }
 }

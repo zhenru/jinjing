@@ -33,29 +33,44 @@ public class DefaultSpringRedisCache implements Cache {
     @Override
     public ValueWrapper get(Object cacheKeyObj) {
 
-
         String cacheKey = cacheKeyObj.toString();
-
-        String cacheContent = cache.get(cacheKey);
-
+        CacheRegistry cacheRegistry = CacheParser.parseCacheRegistry(cacheKey);
+        String cacheContent = null;
+        if (cacheRegistry.getMultiKey()) {
+            CacheParser.Pair pair = CacheParser.generateMultiKey(cacheKey);
+            cacheContent = cache.hGet(pair.getKey(), pair.getField());
+        } else {
+            cacheContent = cache.get(cacheKey);
+        }
         System.out.println(" spring read cacheKey = " + cacheKeyObj + " cache content = " + cacheContent);
 
         if (cacheContent == null) {
             return null;
         } else {
-            return () -> CacheParser.parseCacheContent(CacheParser.parseCacheRegistry(cacheKey), cacheContent);
+            String finalCacheContent = cacheContent;
+            return () -> CacheParser.parseCacheContent(cacheRegistry, finalCacheContent);
         }
     }
 
     @Override
-    public <T> T get(Object key, Class<T> type) {
+    public <T> T get(Object cacheKeyObj, Class<T> type) {
 
-        String cacheKey = key.toString();
-        String cacheContent = cache.get(cacheKey);
-        if (cacheContent != null) {
-            return JSONUtil.readValue(cacheContent, type);
+        String cacheKey = cacheKeyObj.toString();
+        CacheRegistry cacheRegistry = CacheParser.parseCacheRegistry(cacheKey);
+        String cacheContent = null;
+        if (cacheRegistry.getMultiKey()) {
+            cacheContent = cache.get(cacheKey);
+        } else {
+            CacheParser.Pair pair = CacheParser.generateMultiKey(cacheKey);
+            cacheContent = cache.hGet(pair.getKey(), pair.getField());
         }
-        return null;
+        System.out.println(" spring read cacheKey = " + cacheKeyObj + " cache content = " + cacheContent);
+        if (cacheContent == null) {
+            return null;
+        } else {
+            String finalCacheContent = cacheContent;
+            return JSONUtil.readValue(finalCacheContent, type);
+        }
     }
 
     /**
@@ -69,11 +84,18 @@ public class DefaultSpringRedisCache implements Cache {
 
         String cacheKey = cacheKeyObject.toString();
         CacheRegistry cacheRegistry = CacheParser.parseCacheRegistry(cacheKey);
-        if (cacheRegistry.getExpireSecond() > 0) {
-            cache.setEx(cacheKey, CacheParser.parseCacheValue(cacheRegistry, value), cacheRegistry.getExpireSecond());
+        String cacheContent = CacheParser.parseCacheValue(cacheRegistry, value);
+        if (cacheRegistry.getMultiKey()) {
+            CacheParser.Pair pair = CacheParser.generateMultiKey(cacheKey);
+            cache.hSet(pair.getKey(), pair.getField(), cacheContent);
         } else {
-            cache.set(cacheKey, CacheParser.parseCacheValue(cacheRegistry, value));
+            if (cacheRegistry.getExpireSecond() > 0) {
+                cache.setEx(cacheKey, cacheContent, cacheRegistry.getExpireSecond());
+            } else {
+                cache.set(cacheKey, cacheContent);
+            }
         }
+
     }
 
     @Override
