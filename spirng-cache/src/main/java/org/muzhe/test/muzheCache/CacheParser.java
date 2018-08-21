@@ -7,7 +7,7 @@ package org.muzhe.test.muzheCache;
 public interface CacheParser {
 
     /**
-     * 将对应的CacheRegistry　和　生成key对应的　参数列表生成对应的key.
+     * 1.将对应的CacheRegistry　和　生成key对应的　参数列表生成对应的key.
      * @param cacheRegistry     当前缓存对应的参数
      * @param params           生成缓存key所用到的参数
      * @return                  缓存对应的key
@@ -16,14 +16,14 @@ public interface CacheParser {
 
 
     /**
-     * 根据cacheKey生成对应的CacheRegistry
+     * 2.根据cacheKey生成对应的CacheRegistry
      * @param cacheKey      缓存中存放的key
      * @return              CacheRegistry
      */
     CacheRegistry parseCacheRegistry(String cacheKey);
 
     /**
-     * 将缓存对应的对象转换为String
+     * 3.将缓存对应的对象转换为String
      * @param cacheRegistry         缓存描述信息
      * @param cacheValue            缓存对象
      * @return                      缓存内容
@@ -31,7 +31,7 @@ public interface CacheParser {
     String parseCacheValue(CacheRegistry cacheRegistry , Object cacheValue);
 
     /**
-     * 将缓存内容转变为　对象
+     * 4.将缓存内容转变为　对象
      * @param cacheRegistry         缓存描述信息
      * @param cacheContent          缓存内容
      * @return                      缓存对应的对象。

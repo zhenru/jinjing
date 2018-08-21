@@ -15,7 +15,7 @@ public class Assert {
      * @param exceptionSupplier 异常提供信息
      */
     public static void assertTrue(boolean expression, Supplier<LocalException> exceptionSupplier) {
-        if (expression) {
+        if (!expression) {
             throw exceptionSupplier.get();
         }
     }
