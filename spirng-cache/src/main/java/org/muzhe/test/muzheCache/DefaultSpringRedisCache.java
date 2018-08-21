@@ -69,8 +69,11 @@ public class DefaultSpringRedisCache implements Cache {
 
         String cacheKey = cacheKeyObject.toString();
         CacheRegistry cacheRegistry = CacheParser.parseCacheRegistry(cacheKey);
-        cache.set(cacheKey, CacheParser.parseCacheValue(cacheRegistry, value));
-
+        if (cacheRegistry.getExpireSecond() > 0) {
+            cache.setEx(cacheKey, CacheParser.parseCacheValue(cacheRegistry, value), cacheRegistry.getExpireSecond());
+        } else {
+            cache.set(cacheKey, CacheParser.parseCacheValue(cacheRegistry, value));
+        }
     }
 
     @Override

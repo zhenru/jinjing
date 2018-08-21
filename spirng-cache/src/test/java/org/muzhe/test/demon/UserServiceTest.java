@@ -22,9 +22,9 @@ public class UserServiceTest extends LocalSpringBaseTest {
         user.setAge(32);
         user.setName("你好");
 
-        userService.saveUser(12, "张三", Boolean.FALSE);
+        userService.saveUser(13, "张三", Boolean.FALSE);
         System.out.println("完成了功能的测试");
-        userService.saveUser(12, "张三", Boolean.FALSE);
+        userService.saveUser(13, "张三", Boolean.FALSE);
 
     }
 
