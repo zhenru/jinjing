@@ -2,6 +2,7 @@ package org.muzhe.test.muzheCache;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
+import com.sun.prism.shader.Solid_TextureRGB_AlphaTest_Loader;
 import lombok.Data;
 import org.apache.commons.lang.StringUtils;
 import org.muzhe.test.muzheCache.exceptions.LocalException;
@@ -22,6 +23,8 @@ import static org.muzhe.test.muzheCache.util.Assert.assertTrue;
 public class CacheParser {
 
     private static final String SEPERATOR = ":";
+
+    private static final String DEFAULT_NULL = "NILL";
 
     /**
      * 1.将对应的CacheRegistry　和　生成key对应的　参数列表生成对应的key.
@@ -61,6 +64,9 @@ public class CacheParser {
      * @return 缓存内容
      */
     public static String parseCacheValue(CacheRegistry cacheRegistry, Object cacheValue) {
+        if (cacheValue == null) {
+            return DEFAULT_NULL;
+        }
         Type type = cacheRegistry.getValueType().getType();
         String typeName = type.getTypeName();
         if (typeName.equals(Integer.class.getTypeName()) ||
@@ -86,6 +92,10 @@ public class CacheParser {
      */
     public static Object parseCacheContent(CacheRegistry cacheRegistry, String cacheContent) {
 
+        if (DEFAULT_NULL.equals(cacheContent)) {
+            return null;
+        }
+
         Type type = cacheRegistry.getValueType().getType();
         if (type.getTypeName().equals(Integer.class.getTypeName())) {
             return Integer.parseInt(cacheContent);
@@ -110,18 +120,19 @@ public class CacheParser {
 
     /**
      * 根据cacheKey生成　多关键字的key
-     * @param cacheKey          数据库的缓存
-     * @return                  返回多个缓存
+     *
+     * @param cacheKey 数据库的缓存
+     * @return 返回多个缓存
      */
-    public static Pair generateMultiKey(String cacheKey){
+    public static Pair generateMultiKey(String cacheKey) {
 
         CacheRegistry cacheRegistry = parseCacheRegistry(cacheKey);
-        assertTrue(cacheRegistry.getMultiKey() ,() -> new LocalException("非法cacheKey"));
+        assertTrue(cacheRegistry.getMultiKey(), () -> new LocalException("非法cacheKey"));
 
         int multiKeyIndex = cacheKey.lastIndexOf(SEPERATOR);
         String key = cacheKey.substring(0, multiKeyIndex);
         String field = cacheKey.substring(multiKeyIndex + 1);
-        Pair pair  = new Pair();
+        Pair pair = new Pair();
         pair.setKey(key);
         pair.setField(field);
         return pair;
@@ -153,7 +164,7 @@ public class CacheParser {
     }
 
     @Data
-    public  static class Pair{
+    public static class Pair {
         /**
          * 缓存的key
          */
@@ -164,4 +175,5 @@ public class CacheParser {
          */
         private String field;
     }
+
 }
