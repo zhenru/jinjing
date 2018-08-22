@@ -98,17 +98,29 @@ public class DefaultSpringRedisCache implements Cache {
 
     }
 
+    /**
+     * 这个方法是在更新后被调用的
+     *
+     * @param key
+     */
     @Override
     public void evict(Object key) {
 
         String cacheKey = key.toString();
-        cache.del(cacheKey);
+        CacheRegistry cacheRegistry = CacheParser.parseCacheRegistry(cacheKey);
+        if (cacheRegistry.getMultiKey()) {
+            CacheParser.Pair pair = CacheParser.generateMultiKey(cacheKey);
+            cache.hDel(pair.getKey(), pair.getField());
+        } else {
+            cache.del(cacheKey);
+        }
 
     }
 
     @Override
     public void clear() {
 
+        //todo
         System.out.println(" clean the redis ....");
     }
 }

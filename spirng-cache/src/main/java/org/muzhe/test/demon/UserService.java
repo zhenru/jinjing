@@ -1,5 +1,6 @@
 package org.muzhe.test.demon;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
@@ -47,6 +48,13 @@ public class UserService {
         cat.setName("catName");
         cat.setColor("red");
         return cat;
+
+    }
+
+    @CacheEvict(value = "redis-cache", key = "T(org.muzhe.test.muzheCache.CacheParser).parseCacheKey(T(org.muzhe.test.muzheCache.CacheRegistryEnum).CAT_TYPE,#type,#Id)")
+    public void updateCatByType(String type, String Id) {
+
+        System.out.println("update the cat type = " + type + " Id = " + Id);
 
     }
 
