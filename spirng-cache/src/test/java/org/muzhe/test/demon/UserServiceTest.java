@@ -95,4 +95,12 @@ public class UserServiceTest extends LocalSpringBaseTest {
         String id = "catId";
         userService.updateCatByType(type, id);
     }
+
+    @Test
+    public void testPutCat(){
+
+        String type = "1";
+        String id = "catId";
+        userService.putCatByType(type, id);
+    }
 }

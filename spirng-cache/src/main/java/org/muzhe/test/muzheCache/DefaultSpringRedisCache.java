@@ -1,8 +1,11 @@
 package org.muzhe.test.muzheCache;
 
+import com.google.common.base.Objects;
 import org.muzhe.test.muzheCache.cache.RedisCache;
 import org.muzhe.test.muzheCache.util.JSONUtil;
 import org.springframework.cache.Cache;
+
+import java.util.Optional;
 
 /**
  * 默认的Spring的cache的实现。
@@ -13,6 +16,8 @@ import org.springframework.cache.Cache;
 public class DefaultSpringRedisCache implements Cache {
 
     private org.muzhe.test.muzheCache.cache.Cache cache = new RedisCache();
+
+    private static final String DEFAULT_NULL = "";
 
     @Override
     public String getName() {
@@ -83,6 +88,7 @@ public class DefaultSpringRedisCache implements Cache {
     public void put(Object cacheKeyObject, Object value) {
 
         String cacheKey = cacheKeyObject.toString();
+        System.out.println("cache key = " + cacheKey + "valur = " + value);
         CacheRegistry cacheRegistry = CacheParser.parseCacheRegistry(cacheKey);
         String cacheContent = CacheParser.parseCacheValue(cacheRegistry, value);
         if (cacheRegistry.getMultiKey()) {
@@ -122,5 +128,25 @@ public class DefaultSpringRedisCache implements Cache {
 
         //todo
         System.out.println(" clean the redis ....");
+    }
+
+    /**
+     * 给null值返回一个默认空值，这样能够被写到　redis中去。
+     *
+     * @param cacheContent cache值
+     * @return
+     */
+    private String toRealCacheContent(String cacheContent) {
+        return Optional.ofNullable(cacheContent).orElse(DEFAULT_NULL);
+    }
+
+    /**
+     * 将cache中存储的默认控制转变为　真实　的null
+     *
+     * @param cacheContent cache中存放的值
+     * @return
+     */
+    private String fromRealCacheNUll(String cacheContent) {
+        return DEFAULT_NULL.equals(cacheContent) ? null : cacheContent;
     }
 }

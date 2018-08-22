@@ -1,6 +1,7 @@
 package org.muzhe.test.demon;
 
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
@@ -58,5 +59,8 @@ public class UserService {
 
     }
 
-
+    @CachePut(value = "redis-cache", key = "T(org.muzhe.test.muzheCache.CacheParser).parseCacheKey(T(org.muzhe.test.muzheCache.CacheRegistryEnum).CAT_TYPE, #type , #id)")
+    public void putCatByType(String type, String id) {
+        System.out.println("hello world");
+    }
 }
