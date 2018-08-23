@@ -67,4 +67,40 @@ public class UserServiceTest extends LocalSpringBaseTest {
         Cat cat = userService.queryCatByType(type, id);
         System.out.println(cat);
     }
+
+    @Test
+    public void testQueryCat2() {
+
+        String type = "1";
+        String id = "catId2";
+
+        Cat cat = userService.queryCatByType(type, id);
+        System.out.println(cat);
+    }
+
+    @Test
+    public void testQueryCat3() {
+
+        String type = "1";
+        String id = "catId3";
+
+        Cat cat = userService.queryCatByType(type, id);
+        System.out.println(cat);
+    }
+
+    @Test
+    public void testUpdateCat() {
+
+        String type = "1";
+        String id = "catId";
+        userService.updateCatByType(type, id);
+    }
+
+    @Test
+    public void testPutCat(){
+
+        String type = "1";
+        String id = "catId";
+        userService.putCatByType(type, id);
+    }
 }
