@@ -1,5 +1,7 @@
 package org.muzhe.test.tsinghua.dsa.vector;
 
+import jdk.management.resource.internal.inst.FileOutputStreamRMHooks;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -23,6 +25,30 @@ public class VectorTest {
         OrderVector<String> orderVector = new OrderVector<String>(9);
         System.out.println(orderVector.size());
 
+    }
+
+    @Test
+    public void testFindRang(){
+
+        OrderVector<Integer> orderVector = new OrderVector<Integer>();
+        for (int i = 0 ; i < 12 ; i++){
+            orderVector.add(i);
+        }
+        int i = orderVector.find(3, 0, 11);
+        Assert.assertEquals(2, i);
+    }
+
+    @Test
+    public void testFindValueInRange(){
+
+        OrderVector<Integer> orderVector = new OrderVector<Integer>();
+        for (int i = 0 ; i < 12;i++ ){
+            orderVector.add(i);
+        }
+
+        int i = orderVector.find(-1, 0, 11);
+
+        System.out.println(i);
     }
 
     @Test
@@ -72,6 +98,22 @@ public class VectorTest {
 
     @Test
     public void traverse() {
+    }
+
+
+    @Test
+    public void testDeDuplicate(){
+
+        OrderVector orderVector = new OrderVector();
+
+        for (int i = 0 ; i< 100;i++){
+            orderVector.add(i);
+            orderVector.add(i+1);
+        }
+        int i = orderVector.deDuplicate();
+        System.out.println(i);
+
+        System.out.println(orderVector);
     }
 
 

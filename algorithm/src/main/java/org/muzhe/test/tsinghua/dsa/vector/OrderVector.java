@@ -113,7 +113,7 @@ public class OrderVector<T> implements Vector<T> {
      */
     public int remove(int low, int high){
 
-        if (low<0 || low> high||high>size){
+        if (low<0 || low> high||high>=size){
             throw new RuntimeException("rank不合法");
         }
 
@@ -145,12 +145,36 @@ public class OrderVector<T> implements Vector<T> {
         return 0;
     }
 
+    public int find(T t, int low, int high){
+
+        if (low< 0 || low> high || high>=size){
+            throw new RuntimeException("秩的位置不合法");
+        }
+
+        while ((low <= high)&&(!t.equals(this.elements[high--]))){
+
+        }
+        return high;
+    }
+
     public int search(T t) {
         return 0;
     }
 
-    public void duplicate() {
+    public int deDuplicate() {
 
+        int oldSize = this.size;
+
+       int i = 1;
+       while (i < this.size){
+           if (find((T) elements[i], 0, i - 1) < 0) {
+               i++;
+           } else {
+               remove(i);
+           }
+       }
+
+        return oldSize - size;
     }
 
     public void uniquify() {
@@ -224,8 +248,8 @@ public class OrderVector<T> implements Vector<T> {
     public String toString(){
 
         StringBuilder sb = new StringBuilder();
-        for (Object v : this.elements){
-            sb.append(v);
+        for (int i = 0 ; i< this.size ;i++){
+            sb.append(this.elements[i]).append(" ");
         }
         return sb.toString();
     }

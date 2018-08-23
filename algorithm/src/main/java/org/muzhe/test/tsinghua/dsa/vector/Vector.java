@@ -67,6 +67,15 @@ public interface Vector<T> {
     int find(T t);
 
     /**
+     * 在区间[low,hign)之间查找元素t,如果找到了，就返回秩最大的哪个。
+     * @param t
+     * @param low
+     * @param high
+     * @return
+     */
+    int find(T t, int low , int high);
+
+    /**
      * note:这个向量是一个有序向量
      * 在向量中查找t,返回向量中不大于t的最大位置
      * @param t
@@ -77,8 +86,9 @@ public interface Vector<T> {
     /**
      * 向量是一个无序向量
      * 删除当前向量中的重复的部分
+     * @return  其中相同元素的个数
      */
-    void duplicate();
+    int deDuplicate();
 
     /**
      * 有序向量中重复的部分删除
