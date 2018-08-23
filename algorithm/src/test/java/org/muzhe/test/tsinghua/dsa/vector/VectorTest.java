@@ -129,4 +129,22 @@ public class VectorTest {
         System.out.println(orderVector);
 
     }
+
+    @Test
+    public void testUniquify(){
+
+        OrderVector<Integer> orderVector = new OrderVector<Integer>();
+        for (int i =0 ; i< 10 ; i++){
+            orderVector.add(i);
+            orderVector.add(i+1);
+        }
+        System.out.println(orderVector);
+        int uniquify = orderVector.uniquify();
+
+        System.out.println(uniquify);
+        System.out.println(orderVector);
+
+
+
+    }
 }

@@ -163,10 +163,13 @@ public class OrderVector<T> implements Vector<T> {
 
     public int deDuplicate() {
 
+        //记录原来的向量的长度
         int oldSize = this.size;
-
+        //秩从第一个开始，原因是之前的元素一定是单调唯一的。
        int i = 1;
+       //从第i个元素开始
        while (i < this.size){
+           //找出在i之前的区间中，当前第i的元素是否存在，如果存在就删除，如果不存在就去看下一个。
            if (find((T) elements[i], 0, i - 1) < 0) {
                i++;
            } else {
@@ -177,8 +180,24 @@ public class OrderVector<T> implements Vector<T> {
         return oldSize - size;
     }
 
-    public void uniquify() {
+    /**
+     * 将有序数组中相同的元素给去掉。
+     */
+    public int uniquify() {
 
+        int i = 0 , j =0;
+
+        //j负责遍历当前元素
+        while (++j< this.size){
+            if (elements[i] != elements[j]){
+                elements[++i] = elements[j];
+            }
+        }
+        //i指向了当前元素的位置。所以在设置size的时候需要移动到下一个元素的位置
+        this.size = ++i;
+        shrunk();
+        //这个时候i和j指向了新旧两个size的位置，这两个就是当前的差值就是数组中相同的元素个数
+        return j-i;
     }
 
     public void traverse(Function<T> function) {

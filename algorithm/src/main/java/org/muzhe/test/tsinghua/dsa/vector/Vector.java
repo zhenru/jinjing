@@ -92,8 +92,10 @@ public interface Vector<T> {
 
     /**
      * 有序向量中重复的部分删除
+     * 这个是有序的，这个方法和duDuplicate的区别是deDuplicate是一个通用的方法，
+     * 而当前方法只能对有序的数组使用。所以两者的性能也差的比较远
      */
-    void uniquify();
+    int uniquify();
 
     /**
      * 遍历当前向量并使用function函数来处理对应的元素
