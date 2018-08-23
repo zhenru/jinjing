@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * todo 这里后面再改一下。
  * @author muzhe-wang on 18/8/23.
  */
 public class VectorTest {
@@ -38,6 +39,7 @@ public class VectorTest {
 
     @Test
     public void insert() {
+        OrderVector<Integer> orderVector = new OrderVector<Integer>(12);
     }
 
     @Test
@@ -70,5 +72,19 @@ public class VectorTest {
 
     @Test
     public void traverse() {
+    }
+
+
+    @Test
+    public void testAdd(){
+
+        OrderVector<Integer> orderVector = new OrderVector<Integer>(12);
+        orderVector.add(12);
+        orderVector.add(23);
+        for (int i =  0  ; i< 100000; i++){
+            orderVector.add(i);
+        }
+        System.out.println(orderVector);
+
     }
 }

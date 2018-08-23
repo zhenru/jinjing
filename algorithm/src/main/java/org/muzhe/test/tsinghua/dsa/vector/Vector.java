@@ -41,6 +41,14 @@ public interface Vector<T> {
     T remove(int r);
 
     /**
+     * 区间删除，删除low到high之间的元素
+     * @param low       左区间
+     * @param high      右区间
+     * @return          删除的数量
+     */
+    int remove(int low , int high);
+
+    /**
      * 判断当前向量按照非降序排列
      * @return
      */
@@ -83,4 +91,5 @@ public interface Vector<T> {
      */
     void traverse(Function<T> function);
 
+    void add(T value);
 }
