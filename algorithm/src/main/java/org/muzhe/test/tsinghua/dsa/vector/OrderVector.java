@@ -5,7 +5,7 @@ package org.muzhe.test.tsinghua.dsa.vector;
  *
  * @author muzhe-wang on 18/8/21.
  */
-public class OrderVector<T> implements Vector<T> {
+public class OrderVector<T extends Comparable> implements Vector<T> {
 
     private static final int DEFAULT_CAPACITY = 10;
 
@@ -210,6 +210,36 @@ public class OrderVector<T> implements Vector<T> {
     }
 
     /**
+     * 在区间 [low,high)的有序区间中查找 t的元素，如果查找失败就返回-1
+     * 升序
+     * @param t
+     * @param low
+     * @param high
+     * @return
+     */
+    public int binSearch(T t , int low , int high){
+
+
+        //由于区间是 做闭右开的，所以这里用小于号，因为最后都不会被访问到
+        while (low < high){
+
+            //通过 这个二分 将当前数组 分为两个小数组。
+            int middle = (low+ high)>>1;
+
+            //element[middle] 比 t 小
+            if (((T)this.elements[middle]).compareTo(t) <0){
+                low = middle+1;
+            }else if (((T)this.elements[middle]).compareTo(t)>0){
+                high = middle;
+            }else {
+                return middle;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
      * 将 source中从start开始到end结束的元素复制到  当前数组中去
      * 在copy中设置了容量和数据的多少。
      * @param source 源数组
@@ -260,6 +290,8 @@ public class OrderVector<T> implements Vector<T> {
 
 
     }
+
+
 
 
 
