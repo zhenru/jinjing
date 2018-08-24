@@ -102,7 +102,7 @@ public class VectorTest {
 
 
     @Test
-    public void testSearch(){
+    public void testBinSearch(){
 
         OrderVector<Integer> orderVector = new OrderVector<Integer>();
         for (int i = 0 ; i < 2000 ; i++){
