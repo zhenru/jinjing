@@ -253,6 +253,34 @@ public class OrderVector<T extends Comparable> implements Vector<T> {
         return  -1;
     }
 
+
+    /**
+     * 使用二分查找 [low , high) 其中的区间是左闭右开的
+     * 使用mid将当前的位置分为两部分，左面为 [low , mind) 右边为[mid , high)
+     * 一直查找，一直到 low和mid相等时候，这个时候low就是我们想要的结果了
+     * @param t      待查找的数
+     * @param low     左区间
+     * @param high      右区间。
+     * @return          t出现的位置，如果不存在就返回 -1
+     */
+    public int binSearch2(T t, int low , int high){
+    //在所有的查找中，high都是当前区间最后一个的下一位，low是当前位置的最低位。
+        //当high和low之间的值差1的时候，这个时候就可以判断这个值是否是我们想要的哪个值了。 两个位置。
+       while (high - low > 1){
+           //以中点为轴，不断向下深入，直到长度为1.
+           int mid = (high + low) >> 1;
+           if (t.compareTo(this.elements[mid]) <0){
+               //小于，说明在左侧 [low, mid)
+               high = mid;
+           }else {
+               //大于，说明在右侧。[mid, high)
+               low = mid;
+           }
+       }
+        //一直定位，最终只会有一个值的时候，这个时候就进行判断。
+       return t.compareTo(this.elements[low]) == 0 ? low : -1;
+    }
+
     /**
      * 将 source中从start开始到end结束的元素复制到  当前数组中去
      * 在copy中设置了容量和数据的多少。
