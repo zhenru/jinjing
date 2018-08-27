@@ -1,7 +1,6 @@
 package org.muzhe.test.tree;
 
 import org.muzhe.test.tree.model.TreeNode;
-import sun.jvm.hotspot.ui.tree.BadAddressTreeNodeAdapter;
 
 /**
  * 树的帮助类，主要用来帮助生成一些帮助的类的实现。

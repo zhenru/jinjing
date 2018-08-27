@@ -189,7 +189,38 @@ public class VectorTest {
         System.out.println(uniquify);
         System.out.println(orderVector);
 
+    }
 
+    @Test
+    public void testBubbleSortBase(){
 
+        OrderVector<Integer> orderVector = new OrderVector<Integer>();
+
+        orderVector.add(12);
+        orderVector.add(13);
+        for (int i = 0 ; i < 12 ; i++){
+            orderVector.add(i);
+        }
+
+        System.out.println(orderVector);
+
+        orderVector.bubbleSorBase( 0 , orderVector.size());
+
+        System.out.println(orderVector);
+    }
+
+    @Test
+    public void testBubbleSortBase2(){
+
+        OrderVector<Integer> orderVector = new OrderVector<Integer>();
+        orderVector.add(12);
+        orderVector.add(13);
+        for (int i = 0 ; i < 12 ; i++){
+            orderVector.add(i);
+        }
+
+        System.out.println(orderVector);
+        orderVector.bubbleSortBase2(0, orderVector.size());
+        System.out.println(orderVector);
     }
 }
