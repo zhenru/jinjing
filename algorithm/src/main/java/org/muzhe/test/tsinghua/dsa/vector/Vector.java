@@ -97,6 +97,14 @@ public interface Vector<T> {
      */
     int uniquify();
 
+
+    /**
+     * 对 [low,high)区间的元素进行排序
+     * @param low
+     * @param high
+     */
+    void sort(int low , int high);
+
     /**
      * 遍历当前向量并使用function函数来处理对应的元素
      * @param function

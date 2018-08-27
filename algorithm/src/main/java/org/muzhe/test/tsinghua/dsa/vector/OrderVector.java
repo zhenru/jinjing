@@ -255,6 +255,151 @@ public class OrderVector<T extends Comparable> implements Vector<T> {
         return  -1;
     }
 
+
+    /**
+     * 使用二分查找 [low , high) 其中的区间是左闭右开的
+     * 使用mid将当前的位置分为两部分，左面为 [low , mind) 右边为[mid , high)
+     * 一直查找，一直到 low和mid相等时候，这个时候low就是我们想要的结果了
+     * @param t      待查找的数
+     * @param low     左区间
+     * @param high      右区间。
+     * @return          t出现的位置，如果不存在就返回 -1
+     */
+    public int binSearch2(T t, int low , int high){
+    //在所有的查找中，high都是当前区间最后一个的下一位，low是当前位置的最低位。
+        //当high和low之间的值差1的时候，这个时候就可以判断这个值是否是我们想要的哪个值了。 两个位置。
+       while (high - low > 1){
+           //以中点为轴，不断向下深入，直到长度为1.
+           int mid = (high + low) >> 1;
+           if (t.compareTo(this.elements[mid]) <0){
+               //小于，说明在左侧 [low, mid)
+               high = mid;
+           }else {
+               //大于，说明在右侧。[mid, high)
+               low = mid;
+           }
+       }
+        //一直定位，最终只会有一个值的时候，这个时候就进行判断。
+       return t.compareTo(this.elements[low]) == 0 ? low : -1;
+    }
+
+    /**
+     * 从有序列表区间中，[low,high)查找元素 t。返回不大于t的最大元素的位置。
+     * 就是如果有多个相同的t就返回最后一个t的位置，如果不存在，就返回最接近t的元素的位置。
+     *
+     *[low , mid) [mid+1,high)
+     * @param t                 待查找的元素
+     * @param low
+     * @param high
+     * @return
+     */
+    public int binSearch3(T t, int low ,int high){
+        //不变性  elements[0,low) < e < elements[high , n)
+        while (low < high){ // low = high
+
+            int mid = (low + high)>> 1;
+            if (t.compareTo(this.elements[mid]) < 0){
+                high = mid;
+            }else {
+                low = mid+1;
+            }
+        }
+        //在跳出循环的时候，处于的状态是 elements[low = high = mid] > t
+        return --low;
+
+    }
+
+    /**
+     * 对序列 [low, high)之间的元素进行排序
+     * @param low
+     * @param high
+     */
+    public void sort(int low , int high){
+        int sortCheck = ((int)(Math.random()*10))%5;
+
+        switch (sortCheck){
+            case  5 : bubbleSort(low, high);break;
+            case  6: selectionSort(low,high); break;
+            case 7: mergeSort(low , high);break;
+            case 8 :heapSort(low, high); break;
+            default: quickSort(low , high); break;
+        }
+
+    }
+
+    /**
+     * 快速排序
+     * @param low
+     * @param high
+     */
+    private void quickSort(int low, int high) {
+
+    }
+
+    /**
+     * 堆排序
+     * @param low
+     * @param high
+     */
+    private void heapSort(int low, int high) {
+
+    }
+
+    /**
+     * 归并排序
+     * @param low
+     * @param high
+     */
+    private void mergeSort(int low, int high) {
+
+    }
+
+    /**
+     * 选择排序
+     * @param low
+     * @param high
+     */
+    private void selectionSort(int low, int high) {
+
+    }
+
+    /**
+     * 将[low,high) 区间的元素移动到最后的位置。
+     * 逐趟做扫描交换，将元素移动到最后的位置上去。
+     * 冒泡排序 ，
+     * @param low
+     * @param high
+     */
+    protected void bubbleSort(int low, int high) {
+
+        while (!bubble(low , high--)){
+
+        }
+    }
+
+    /**
+     * 将[low , high)序列中最大的元素移动到 high的位置上去。
+     * @param low
+     * @param high
+     * @return
+     */
+    private boolean bubble(int low, int high) {
+        
+        return false;
+    }
+
+
+    /**
+     * 一般的二分使用mid来不短将当前的元素进行收敛，但是可以做一个假设，当前序列中元素是单调递增的，这样能够迅速的收敛。
+     * @param t
+     * @param low
+     * @param high
+     * @return
+     */
+    public int binSearch4(T t, int low , int high){
+        return -1;
+    }
+
     /**
      * 将 source中从start开始到end结束的元素复制到  当前数组中去
      * 在copy中设置了容量和数据的多少。
