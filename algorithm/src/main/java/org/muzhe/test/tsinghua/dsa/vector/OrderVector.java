@@ -383,39 +383,87 @@ public class OrderVector<T extends Comparable> implements Vector<T> {
 
     }
 
+
     /**
-     * 对elements 中的　[low,high)之间的元素进行排序
-     *
+     * 对elements[low,high)中的元素进行排序、
+     * 之前的优化能够很大程度上减少冒泡次数。
+     * 但是如果前半部分无序，后半部有序的这种序列，我们是否可以减小对应的范围？
+     * 对于后半部分有序，前面无序的情况，我们能否迅速的
      * @param low
      * @param high
      */
-    public void bubbleSorBase(int low, int high) {
+    public void bubbleSortBase3(int low , int high){
 
-        for (boolean sorted = false; sorted =!sorted; high--) { //反复扫描交换，每一趟
-            for (int i = low + 1; i < high; i++) {//从左向右，逐对检查A[low,high)中相邻的元素
-                if (((T) this.elements[i - 1]).compareTo(this.elements[i]) > 0) {//若你学
-                    swap(i - 1, i);
-                    sorted = false;
-                }
+
+
+
+    }
+
+
+    /**
+     * 对elements 中的　[low,high)之间的元素进行排序
+     * <p>
+     * 这个是　冒泡排序的优化
+     * <p>
+     * 相对于基础bubble排序，将会有大量的无效的比较，即使当前数组中的元素已经有序了，依然进行后面的排序。这里我们可以进行优化有一下，
+     * 使用一个状态位表示一下当前数组中是否已经有序
+     * 通过一轮bubble以后，发现压根就没有需要冒泡(逆序)，这个时候就可以结束当前的运算了。
+     * 这里可以做一个代码的优化
+     *
+     * 这种算法比较好的优化，前面是有序的，后面是无序的这种情况。
+     * @param low
+     * @param high
+     */
+    public void bubbleSortBase2(int low, int high) {
+        while (!(bubble2(low, high--))) {
+        }
+    }
+
+    /**
+     * 对　elements[low,high)之间的元素进行一次bubble将最大的元素移动到high-1的位置。
+     *
+     * @param low  下限
+     * @param high 　上限
+     * @return 返回当前一次冒泡中是否有逆序
+     */
+    private boolean bubble2(int low, int high) {
+        //一次bubble将所有的元素一次进行比较，将最大的那个元素移动到high下的那个位置上无。i表示移动的目标地址。
+        //这里使用low+1表示会更好一些。使用标识的位置操作数据，走位
+        boolean sorted = true;
+        for (int i = low + 1; i < high; i++) {
+            if (((T) this.elements[i - 1]).compareTo(this.elements[i]) > 0) {
+                swap(i - 1, i);
+                sorted = false;
             }
         }
-
+        return sorted;
     }
 
     /**
      * 对elements[low,high)之间的元素进行冒泡排序
+     *
      * @param low
      * @param high
      */
-    public void bubbleSortBase2(int low ,int high){
+    public void bubbleSortBase(int low, int high) {
+        int num = 0;
 
-        for (int i = high;i>low;i--){
-            for (int j = low+1 ; j< i ;j++){
-                if (((T)this.elements[j-1]).compareTo(this.elements[j]) >0){
-                    swap(j-1, j);
+        //依次将最大的元素移动到high-1的位置上去。使用　i指向　high对象。
+        for (int i = high; i > low; i--) {
+            //从low开始到high结束，依次将交换逆序的两个元素。
+            for (int j = low + 1; j < i; j++) {
+                num++;
+                if (((T) this.elements[j - 1]).compareTo(this.elements[j]) > 0) {
+                    swap(j - 1, j);
                 }
             }
         }
+
+        System.out.println(num);
+        //这个算法中会有大量的冗余，如果元素已经有序了，还需要进行比较。 这里将会比较满所有的比较 size(size+1) / 2 .
+        // 将会得到当前元素的个数。
+        // 这里可以使用一个状态来记录当前的冒泡的过程是否有序，如果已经有序了，就可以直接结束了。
+//        这里可以做一个优化，使用一个状态位置来记录当前冒泡的过程中是否有序，如果已经有序了，这个过程就可以结束了。
     }
 
     /**

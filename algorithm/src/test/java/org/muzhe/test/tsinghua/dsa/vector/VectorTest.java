@@ -1,26 +1,24 @@
 package org.muzhe.test.tsinghua.dsa.vector;
 
-import jdk.management.resource.internal.inst.FileOutputStreamRMHooks;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * todo 这里后面再改一下。
+ *
  * @author muzhe-wang on 18/8/23.
  */
 public class VectorTest {
 
     @Test
-    public void testNewVector(){
+    public void testNewVector() {
 
         OrderVector<String> orderVector = new OrderVector<String>();
         System.out.println(orderVector.size());
     }
 
     @Test
-    public void testNewVector2(){
+    public void testNewVector2() {
 
         OrderVector<String> orderVector = new OrderVector<String>(9);
         System.out.println(orderVector.size());
@@ -28,10 +26,10 @@ public class VectorTest {
     }
 
     @Test
-    public void testFindRang(){
+    public void testFindRang() {
 
         OrderVector<Integer> orderVector = new OrderVector<Integer>();
-        for (int i = 0 ; i < 12 ; i++){
+        for (int i = 0; i < 12; i++) {
             orderVector.add(i);
         }
         int i = orderVector.find(3, 0, 11);
@@ -39,10 +37,10 @@ public class VectorTest {
     }
 
     @Test
-    public void testFindValueInRange(){
+    public void testFindValueInRange() {
 
         OrderVector<Integer> orderVector = new OrderVector<Integer>();
-        for (int i = 0 ; i < 12;i++ ){
+        for (int i = 0; i < 12; i++) {
             orderVector.add(i);
         }
 
@@ -102,11 +100,11 @@ public class VectorTest {
 
 
     @Test
-    public void testBinSearch(){
+    public void testBinSearch() {
 
         OrderVector<Integer> orderVector = new OrderVector<Integer>();
-        for (int i = 0 ; i < 2000 ; i++){
-            orderVector.add(i*2 + 1);
+        for (int i = 0; i < 2000; i++) {
+            orderVector.add(i * 2 + 1);
         }
 
         System.out.println(orderVector);
@@ -117,12 +115,12 @@ public class VectorTest {
     }
 
     @Test
-    public void testBinSearch2(){
+    public void testBinSearch2() {
 
         OrderVector<Integer> orderVector = new OrderVector<Integer>();
 
-        for (int i = 0 ; i < 2000 ; i++){
-            orderVector.add(i*2 +1);
+        for (int i = 0; i < 2000; i++) {
+            orderVector.add(i * 2 + 1);
         }
         System.out.println(orderVector);
 
@@ -132,12 +130,12 @@ public class VectorTest {
 
 
     @Test
-    public void testBinSearch3(){
+    public void testBinSearch3() {
 
         OrderVector<Integer> orderVector = new OrderVector<Integer>();
-        for (int i = 0 ; i < 2000; i++){
+        for (int i = 0; i < 2000; i++) {
             orderVector.add(i);
-            orderVector.add(i+1);
+            orderVector.add(i + 1);
         }
         System.out.println(orderVector);
         int i = orderVector.binSearch3(2001, 0, orderVector.size());
@@ -147,13 +145,13 @@ public class VectorTest {
 
 
     @Test
-    public void testDeDuplicate(){
+    public void testDeDuplicate() {
 
         OrderVector orderVector = new OrderVector();
 
-        for (int i = 0 ; i< 100;i++){
+        for (int i = 0; i < 100; i++) {
             orderVector.add(i);
-            orderVector.add(i+1);
+            orderVector.add(i + 1);
         }
         int i = orderVector.deDuplicate();
         System.out.println(i);
@@ -163,12 +161,12 @@ public class VectorTest {
 
 
     @Test
-    public void testAdd(){
+    public void testAdd() {
 
         OrderVector<Integer> orderVector = new OrderVector<Integer>(12);
         orderVector.add(12);
         orderVector.add(23);
-        for (int i =  0  ; i< 100000; i++){
+        for (int i = 0; i < 100000; i++) {
             orderVector.add(i);
         }
         System.out.println(orderVector);
@@ -176,12 +174,12 @@ public class VectorTest {
     }
 
     @Test
-    public void testUniquify(){
+    public void testUniquify() {
 
         OrderVector<Integer> orderVector = new OrderVector<Integer>();
-        for (int i =0 ; i< 10 ; i++){
+        for (int i = 0; i < 10; i++) {
             orderVector.add(i);
-            orderVector.add(i+1);
+            orderVector.add(i + 1);
         }
         System.out.println(orderVector);
         int uniquify = orderVector.uniquify();
@@ -192,35 +190,102 @@ public class VectorTest {
     }
 
     @Test
-    public void testBubbleSortBase(){
+    public void testBubbleSortBase() {
 
         OrderVector<Integer> orderVector = new OrderVector<Integer>();
 
         orderVector.add(12);
         orderVector.add(13);
-        for (int i = 0 ; i < 12 ; i++){
+        for (int i = 0; i < 12; i++) {
             orderVector.add(i);
         }
 
         System.out.println(orderVector);
 
-        orderVector.bubbleSorBase( 0 , orderVector.size());
+        orderVector.bubbleSortBase(0, orderVector.size());
 
         System.out.println(orderVector);
     }
 
     @Test
-    public void testBubbleSortBase2(){
+    public void testBubbleSortBase2() {
 
         OrderVector<Integer> orderVector = new OrderVector<Integer>();
         orderVector.add(12);
         orderVector.add(13);
-        for (int i = 0 ; i < 12 ; i++){
+        for (int i = 0; i < 12; i++) {
             orderVector.add(i);
         }
 
         System.out.println(orderVector);
         orderVector.bubbleSortBase2(0, orderVector.size());
         System.out.println(orderVector);
+    }
+
+    @Test
+    public void testBubbleSortBase3() {
+
+        OrderVector<Integer> sequeOrderVector = generateSequeOrderVector1();
+        OrderVector<Integer> unSequeOrderVector = generateUnSequeOrderVector2();
+        OrderVector<Integer> emptyOrderVectory = generateEmptyOrderVector();
+
+        System.out.println(sequeOrderVector);
+        sequeOrderVector.bubbleSortBase2(0, sequeOrderVector.size());
+        System.out.println(sequeOrderVector);
+
+        System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
+
+        System.out.println(unSequeOrderVector);
+        unSequeOrderVector.bubbleSortBase2(0, unSequeOrderVector.size());
+        System.out.println(unSequeOrderVector);
+        System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
+
+        System.out.println(emptyOrderVectory);
+        emptyOrderVectory.bubbleSortBase2(0, emptyOrderVectory.size());
+        System.out.println(emptyOrderVectory);
+    }
+
+    /**
+     * 构造一个空的元素
+     *
+     * @return
+     */
+    private OrderVector<Integer> generateEmptyOrderVector() {
+
+        return new OrderVector<Integer>();
+
+    }
+
+    /**
+     * 构造逆序的元素
+     *
+     * @return 一个逆序的元素
+     */
+    private OrderVector<Integer> generateUnSequeOrderVector2() {
+
+        OrderVector<Integer> orderVector = new OrderVector<Integer>();
+        for (int i = 0; i < 100; i++) {
+
+            orderVector.add(100 - i);
+        }
+        return orderVector;
+    }
+
+    /**
+     * 构造有序的序列
+     *
+     * @return
+     */
+    private OrderVector<Integer> generateSequeOrderVector1() {
+
+        OrderVector<Integer> orderVector = new OrderVector<Integer>();
+
+        for (int i = 0; i < 100; i++) {
+            orderVector.add(i);
+            orderVector.add(i + 1);
+        }
+
+        return orderVector;
+
     }
 }
