@@ -239,6 +239,8 @@ public class OrderVector<T extends Comparable> implements Vector<T> {
         return -1;
     }
 
+
+
     /**
      * todo 在快排中，选择哪一个中间点的性能最优  在二分的时候选择不同的点 比较的次数是不同的。
      * 斐波那契查找，主要解决普通二分查找中，左右两部分不相等的问题。
