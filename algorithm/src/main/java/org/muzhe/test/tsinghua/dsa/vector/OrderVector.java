@@ -282,6 +282,123 @@ public class OrderVector<T extends Comparable> implements Vector<T> {
     }
 
     /**
+     * 从有序列表区间中，[low,high)查找元素 t。返回不大于t的最大元素的位置。
+     * 就是如果有多个相同的t就返回最后一个t的位置，如果不存在，就返回最接近t的元素的位置。
+     *
+     *[low , mid) [mid+1,high)
+     * @param t                 待查找的元素
+     * @param low
+     * @param high
+     * @return
+     */
+    public int binSearch3(T t, int low ,int high){
+        //不变性  elements[0,low) < e < elements[high , n)
+        while (low < high){ // low = high
+
+            int mid = (low + high)>> 1;
+            if (t.compareTo(this.elements[mid]) < 0){
+                high = mid;
+            }else {
+                low = mid+1;
+            }
+        }
+        //在跳出循环的时候，处于的状态是 elements[low = high = mid] > t
+        return --low;
+
+    }
+
+    /**
+     * 对序列 [low, high)之间的元素进行排序
+     * @param low
+     * @param high
+     */
+    public void sort(int low , int high){
+        int sortCheck = ((int)(Math.random()*10))%5;
+
+        switch (sortCheck){
+            case  5 : bubbleSort(low, high);break;
+            case  6: selectionSort(low,high); break;
+            case 7: mergeSort(low , high);break;
+            case 8 :heapSort(low, high); break;
+            default: quickSort(low , high); break;
+        }
+
+    }
+
+    /**
+     * 快速排序
+     * @param low
+     * @param high
+     */
+    private void quickSort(int low, int high) {
+
+    }
+
+    /**
+     * 堆排序
+     * @param low
+     * @param high
+     */
+    private void heapSort(int low, int high) {
+
+    }
+
+    /**
+     * 归并排序
+     * @param low
+     * @param high
+     */
+    private void mergeSort(int low, int high) {
+
+    }
+
+    /**
+     * 选择排序
+     * @param low
+     * @param high
+     */
+    private void selectionSort(int low, int high) {
+
+    }
+
+    /**
+     * 将[low,high) 区间的元素移动到最后的位置。
+     * 逐趟做扫描交换，将元素移动到最后的位置上去。
+     * 冒泡排序 ，
+     * @param low
+     * @param high
+     */
+    protected void bubbleSort(int low, int high) {
+
+        while (!bubble(low , high--)){
+
+        }
+    }
+
+    /**
+     * 将[low , high)序列中最大的元素移动到 high的位置上去。
+     * @param low
+     * @param high
+     * @return
+     */
+    private boolean bubble(int low, int high) {
+        
+        return false;
+    }
+
+
+    /**
+     * 一般的二分使用mid来不短将当前的元素进行收敛，但是可以做一个假设，当前序列中元素是单调递增的，这样能够迅速的收敛。
+     * @param t
+     * @param low
+     * @param high
+     * @return
+     */
+    public int binSearch4(T t, int low , int high){
+        return -1;
+    }
+
+    /**
      * 将 source中从start开始到end结束的元素复制到  当前数组中去
      * 在copy中设置了容量和数据的多少。
      * @param source 源数组

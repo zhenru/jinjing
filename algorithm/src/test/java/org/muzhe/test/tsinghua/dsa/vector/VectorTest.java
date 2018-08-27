@@ -132,6 +132,21 @@ public class VectorTest {
 
 
     @Test
+    public void testBinSearch3(){
+
+        OrderVector<Integer> orderVector = new OrderVector<Integer>();
+        for (int i = 0 ; i < 2000; i++){
+            orderVector.add(i);
+            orderVector.add(i+1);
+        }
+        System.out.println(orderVector);
+        int i = orderVector.binSearch3(2001, 0, orderVector.size());
+        System.out.println(orderVector.get(i));
+        System.out.println(i);
+    }
+
+
+    @Test
     public void testDeDuplicate(){
 
         OrderVector orderVector = new OrderVector();
