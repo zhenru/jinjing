@@ -33,6 +33,7 @@
         <module>viewTemplate</module>
         <module>spirng-cache</module>
         <module>common</module>
+        <module>spring-datasource</module>
     </modules>
 
 
