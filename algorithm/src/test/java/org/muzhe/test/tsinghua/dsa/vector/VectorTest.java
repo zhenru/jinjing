@@ -245,6 +245,28 @@ public class VectorTest {
         System.out.println(emptyOrderVectory);
     }
 
+    @Test
+    public void testBubbleSort3() {
+
+        OrderVector<Integer> orderVector = new OrderVector<Integer>();
+        for (int i = 0; i < 200; i++) {
+            if (i % 2 == 0) {
+                orderVector.add(i * 2 + 1);
+            } else if (i % 3 == 0) {
+                orderVector.add(i * 3 + 1);
+            } else if (i % 5 == 0) {
+                orderVector.add(i * 5 + 1);
+            } else {
+                orderVector.add(i);
+            }
+        }
+
+        System.out.println(orderVector);
+        orderVector.bubbleSortBase3(0, orderVector.size());
+        System.out.println(orderVector);
+
+    }
+
     /**
      * 构造一个空的元素
      *

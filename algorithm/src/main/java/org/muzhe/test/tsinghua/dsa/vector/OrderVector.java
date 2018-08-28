@@ -364,12 +364,37 @@ public class OrderVector<T extends Comparable> implements Vector<T> {
     }
 
     /**
-     * 归并排序
+     * 对　elements[low,high)进行归并排序
      *
-     * @param low
-     * @param high
+     * @param low  当前元素的下限
+     * @param high 元素的上限
      */
     private void mergeSort(int low, int high) {
+
+        if (high - low < 1) {
+            return;
+        }
+        int mid = (low + high) >> 1;
+
+        //对　[low, mid)进行合并排序
+        mergeSort(low , mid);
+        //对　[mid, high) 进行合并排序
+        mergeSort(mid, high);
+        //将　[low,mid) 和　[mid,high)　这两个局部有序的序列进行合并。
+        merge(low, mid, high);
+
+    }
+
+    /**
+     * 将　[low,mid) 和　[mid,high)这两个有序的序列进行合并。
+     * @param low
+     * @param mid
+     * @param high
+     * 合并排序
+     */
+    private void merge(int low, int mid, int high) {
+        //todo
+
 
     }
 
@@ -389,14 +414,35 @@ public class OrderVector<T extends Comparable> implements Vector<T> {
      * 之前的优化能够很大程度上减少冒泡次数。
      * 但是如果前半部分无序，后半部有序的这种序列，我们是否可以减小对应的范围？
      * 对于后半部分有序，前面无序的情况，我们能否迅速的
+     *
      * @param low
      * @param high
      */
-    public void bubbleSortBase3(int low , int high){
+    public void bubbleSortBase3(int low, int high) {
+        //这里我来实现一下　最优秀的版本的冒泡排序
 
+        while (low < (high = bubble3(low, high))) {
+        }
 
+    }
 
+    /**
+     * 对elements[low,high)进行一次冒泡，将其中最小的元素移动到high-1的位置上。
+     *
+     * @param low  elements的下限
+     * @param high 区间的上限
+     * @return 当前有序序列开始的位置
+     */
+    private int bubble3(int low, int high) {
 
+        int firstOrderIndex = low;
+        while (++low < high) {
+            if (((T) this.elements[low - 1]).compareTo(this.elements[low]) > 0) {
+                swap(low - 1, low);
+                firstOrderIndex = low;
+            }
+        }
+        return firstOrderIndex;
     }
 
 
@@ -409,8 +455,9 @@ public class OrderVector<T extends Comparable> implements Vector<T> {
      * 使用一个状态位表示一下当前数组中是否已经有序
      * 通过一轮bubble以后，发现压根就没有需要冒泡(逆序)，这个时候就可以结束当前的运算了。
      * 这里可以做一个代码的优化
-     *
+     * <p>
      * 这种算法比较好的优化，前面是有序的，后面是无序的这种情况。
+     *
      * @param low
      * @param high
      */
