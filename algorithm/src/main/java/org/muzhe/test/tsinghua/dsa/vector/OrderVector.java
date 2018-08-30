@@ -369,15 +369,16 @@ public class OrderVector<T extends Comparable> implements Vector<T> {
      * @param low  当前元素的下限
      * @param high 元素的上限
      */
-    private void mergeSort(int low, int high) {
+    public void mergeSort(int low, int high) {
 
-        if (high - low < 1) {
+        //由于我们使用的是elements[low,high),所以当　high比low大一个的时候就结束了。
+        if (high - low <= 1) {
             return;
         }
         int mid = (low + high) >> 1;
 
         //对　[low, mid)进行合并排序
-        mergeSort(low , mid);
+        mergeSort(low, mid);
         //对　[mid, high) 进行合并排序
         mergeSort(mid, high);
         //将　[low,mid) 和　[mid,high)　这两个局部有序的序列进行合并。
@@ -387,15 +388,31 @@ public class OrderVector<T extends Comparable> implements Vector<T> {
 
     /**
      * 将　[low,mid) 和　[mid,high)这两个有序的序列进行合并。
+     *
      * @param low
      * @param mid
-     * @param high
-     * 合并排序
+     * @param high 合并排序
      */
     private void merge(int low, int mid, int high) {
-        //todo
 
+        Object[] leftElements = new Object[mid - low];
 
+        //将元素copy从　elements中copy到　leftElements中去，这个过程主要是给后面的merge挪位置
+        for (int i = low, leftElementIndex = 0; i < mid; leftElements[leftElementIndex++] = this.elements[i++]) {
+        }
+
+        //left数组是左边的数组，right在elements上，从　mid开始。最终的结果放在low上。其中启动的条件是　左边数组有元素，右边的数组有元素。
+        for (int leftIndex = 0, rightIndex = mid, elementsIndex = low; leftIndex < leftElements.length || rightIndex < high; ) {
+            //左边的数组有元素，[右边的的数组没有元素 || 左边元素比右边元素小]　　就把左边的元素写到　elements中去。
+            if (leftIndex < leftElements.length && ((rightIndex >= high) || ((T) this.elements[rightIndex]).compareTo(leftElements[leftIndex]) >= 0)) {
+                this.elements[elementsIndex++] = leftElements[leftIndex++];
+            }
+            //右边的数组有元素，[左边的数没有元素||右边的元素比左边的小]　　　　　就把右边的元素写到　elements 中去。
+
+            if (rightIndex < high && ((leftIndex >= leftElements.length) || ((T) this.elements[rightIndex]).compareTo(leftElements[leftIndex]) < 0)) {
+                this.elements[elementsIndex++] = this.elements[rightIndex++];
+            }
+        }
     }
 
     /**

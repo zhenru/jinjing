@@ -248,8 +248,27 @@ public class VectorTest {
     @Test
     public void testBubbleSort3() {
 
+        OrderVector<Integer> orderVector = getIntegerRandomOrderVector(200);
+
+        System.out.println(orderVector);
+        orderVector.bubbleSortBase3(0, orderVector.size());
+        System.out.println(orderVector);
+
+    }
+
+    @Test
+    public void testMergeSort(){
+
+        OrderVector<Integer> orderVector = getIntegerRandomOrderVector(200);
+        System.out.println(orderVector);
+        orderVector.mergeSort(0, orderVector.size());
+        System.out.println(orderVector);
+
+    }
+
+    private OrderVector<Integer> getIntegerRandomOrderVector(int num) {
         OrderVector<Integer> orderVector = new OrderVector<Integer>();
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < num; i++) {
             if (i % 2 == 0) {
                 orderVector.add(i * 2 + 1);
             } else if (i % 3 == 0) {
@@ -260,11 +279,7 @@ public class VectorTest {
                 orderVector.add(i);
             }
         }
-
-        System.out.println(orderVector);
-        orderVector.bubbleSortBase3(0, orderVector.size());
-        System.out.println(orderVector);
-
+        return orderVector;
     }
 
     /**
@@ -310,4 +325,5 @@ public class VectorTest {
         return orderVector;
 
     }
+
 }
