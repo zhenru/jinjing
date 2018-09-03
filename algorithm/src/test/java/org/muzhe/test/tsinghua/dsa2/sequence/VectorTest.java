@@ -61,10 +61,15 @@ public class VectorTest {
 
     @Test
     public void size() {
+        Vector<Integer> vector = generateVector(102);
+        System.out.println(vector.size());
+
     }
 
     @Test
     public void empty() {
+        boolean isEmpty = vector.empty();
+        System.out.println(isEmpty);
     }
 
     @Test
@@ -154,7 +159,40 @@ public class VectorTest {
 
     @Test
     public void deduplicate() {
+
+        Vector<Integer> vector = generateDuplicateIntegerVector(20);
+        System.out.println(vector);
+        System.out.println("init size = " + vector.size());
+        int deduplicate = vector.deduplicate();
+        System.out.println("duplicate count = " + deduplicate);
+        System.out.println(vector);
+        System.out.println("after size = " + vector.size());
+
     }
+
+    @Test
+    public void deduplicateV2() {
+
+        Vector<Integer> vector2 = generateDuplicateIntegerVector(200);
+        System.out.println(vector2);
+        System.out.println("init size = " + vector2.size());
+        int deduplicate = vector2.deduplicateV2();
+        System.out.println("duplicate count = " + deduplicate);
+        System.out.println(vector2);
+        System.out.println("after size = " + vector2.size());
+
+        System.out.println(" =============================V0========================================");
+
+
+        Vector<Integer> vector = generateDuplicateIntegerVector(200);
+        System.out.println(vector);
+        System.out.println("init size = " + vector.size());
+        int deduplicate2 = vector.deduplicate();
+        System.out.println("duplicate count = " + deduplicate2);
+        System.out.println(vector);
+        System.out.println("after size = " + vector.size());
+    }
+
 
     @Test
     public void uniquify() {
@@ -174,6 +212,23 @@ public class VectorTest {
             integerVector.insert(2 * i);
         }
         return integerVector;
+
+    }
+
+    /**
+     * 生成重复元素的数组
+     *
+     * @param count
+     * @return
+     */
+    private Vector<Integer> generateDuplicateIntegerVector(int count) {
+
+        Vector<Integer> vector = new Vector<>();
+        for (int i = 0; i < count; i++) {
+            vector.insert(i);
+            vector.insert(i + 1);
+        }
+        return vector;
 
     }
 

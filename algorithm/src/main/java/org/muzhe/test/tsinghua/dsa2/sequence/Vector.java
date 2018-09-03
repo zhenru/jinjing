@@ -159,7 +159,7 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
 
     @Override
     public boolean empty() {
-        return false;
+        return this.size <= 0;
     }
 
     @Override
@@ -276,9 +276,59 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
 
     }
 
+    /**
+     * 将一个无序向量中相同的元素给去掉。
+     * 不排序。这种时间消耗是　n^2
+     *
+     * 从后向前进行去重
+     * @return
+     */
     @Override
     public int deduplicate() {
-        return 0;
+        //从[0,size)开始依次判断元素是否在之前的位置上出现过。
+
+        if (size <= 1) {
+            return 0;
+        }
+        int i = 1;
+
+        int iniSize = this.size;
+        //从[1,size)每个元素和前面的元素序列里查找，如果不存在。就ｉ++,否则就使用当前元素继续执行。
+        //这里查找是从元素的high开始查找，依次向低方向查找，直到返回最低的元素。
+
+        while (i < size) {
+            if ((find((T) this.elements[i], 0, i) < 0)) {
+                i++;
+            } else {
+                remove(i);
+            }
+        }
+        return iniSize - this.size;
+    }
+
+    /**
+     * 以从第一个元素开始，依次和后面的元素进行比较，如果后面有和这个元素相同的，就删除后面的元素。
+     * 这种实现方式是以第０个元素依次和后面的元素进行匹配
+     *  从前向后去重
+     * @return
+     */
+    public int deduplicateV2() {
+
+        int oldSize = this.size;
+        int i = -1;
+        //因为最后一个元素一定是　不重复的，所以最后一个元素不用和后面的进行比较
+        while (++i < this.size - 1) {
+
+            int j = i + 1;
+            while (j < size) {
+                if (this.elements[i] == this.elements[j]) {
+                    remove(j);
+                } else {
+                    j++;
+                }
+            }
+        }
+        return oldSize - this.size;
     }
 
     @Override
