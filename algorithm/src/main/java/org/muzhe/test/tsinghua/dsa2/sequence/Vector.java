@@ -192,14 +192,35 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
         return 0;
     }
 
+    /**
+     * 删除第r的元素，表示删除[r,r+1)的元素
+     *
+     * @param r
+     * @return
+     */
     @Override
     public T remove(int r) {
-        return null;
+        assertTrue(r >= 0 && r < this.size, () -> "元素非法");
+        T returnValue = (T) this.elements[r];
+        remove(r, r + 1);
+        return returnValue;
     }
 
+    /**
+     * 删除[low,high)区间的元素，主要是把 [0,size) ->[0,low)+[high,size) 的元素
+     *
+     * @param low
+     * @param high
+     * @return
+     */
     @Override
     public int remove(int low, int high) {
-        return 0;
+        checkSection(low, high);
+        this.size = this.size + low - high;
+        for (int i = high; i < size; i++) {
+            this.elements[low++] = this.elements[i];
+        }
+        return (high - low);
     }
 
 

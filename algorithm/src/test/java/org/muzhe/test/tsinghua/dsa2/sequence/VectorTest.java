@@ -2,6 +2,8 @@ package org.muzhe.test.tsinghua.dsa2.sequence;
 
 import org.junit.Test;
 
+import static org.muzhe.test.tsinghua.dsa2.sequence.Assert.assertTrue;
+
 /**
  * @author muzhe-wang on  18-9-3 下午3:33.
  */
@@ -97,10 +99,24 @@ public class VectorTest {
 
     @Test
     public void remove() {
+        Vector<Integer> vector = generateVector(10);
+        System.out.println(vector);
+        Integer removeValue = vector.remove(2);
+        System.out.println(removeValue);
+        System.out.println(vector);
+
+
     }
 
     @Test
     public void remove1() {
+
+        Vector<Integer> vector = generateVector(10);
+        System.out.println(vector);
+        int removeNum = vector.remove(2, 9);
+        System.out.println(removeNum);
+        System.out.println(vector);
+        System.out.println(vector.size());
     }
 
     @Test
@@ -146,11 +162,19 @@ public class VectorTest {
 
     private Vector<Integer> generateVector() {
 
+        return generateVector(200);
+
+    }
+
+    private Vector<Integer> generateVector(int size) {
+
+        assertTrue(size > 0, () -> "参数不合法");
         Vector<Integer> integerVector = new Vector<>();
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < size; i++) {
             integerVector.insert(2 * i);
         }
         return integerVector;
+
     }
 
 }
