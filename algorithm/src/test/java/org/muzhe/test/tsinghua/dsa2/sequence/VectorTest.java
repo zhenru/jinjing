@@ -21,6 +21,12 @@ public class VectorTest {
 
     @Test
     public void shrink() {
+
+        Vector<Integer> vector = generateVector(100);
+        while (vector.size() > 0) {
+            vector.remove(vector.size() - 1);
+        }
+
     }
 
     @Test
@@ -33,7 +39,22 @@ public class VectorTest {
 
     @Test
     public void max() {
+        Vector<Integer> vector = generateRandomVector(200);
+        int max = vector.max();
+        System.out.println(vector);
+        System.out.println(vector.get(max));
     }
+
+    @Test
+    public void get() {
+
+        Vector<Integer> vector = generateVector(10);
+        System.out.println(vector);
+        System.out.println(vector.get(2));
+        System.out.println(vector.get(7));
+
+    }
+
 
     @Test
     public void selectSort() {
@@ -230,6 +251,29 @@ public class VectorTest {
         }
         return vector;
 
+    }
+
+    /**
+     * 生成乱序的向量
+     *
+     * @param count
+     * @return
+     */
+    private Vector<Integer> generateRandomVector(int count) {
+
+        Vector<Integer> vector = new Vector<>();
+        for (int i = 0; i < count; i++) {
+            if (i % 2 == 0) {
+                vector.insert(i * 5 + 1);
+            } else if (i % 2 == 0) {
+                vector.insert(i * 3 + 7);
+            } else if (i % 5 == 0) {
+                vector.insert(i * 2 + 1);
+            } else {
+                vector.insert(i);
+            }
+        }
+        return vector;
     }
 
 }

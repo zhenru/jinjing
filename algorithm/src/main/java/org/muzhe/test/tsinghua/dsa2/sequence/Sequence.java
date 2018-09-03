@@ -24,12 +24,25 @@ public  interface Sequence<T extends Comparable<T>> {
     boolean bubble(int low, int high);
 
     /**
+     * 获取　秩＝r位置上的元素
+     * @param r
+     * @return
+     */
+    T get(int r);
+
+    /**
      *冒泡排序
      * @param low
      * @param high
      * @return
      */
     boolean bubbleSort(int low ,int high);
+
+    /**
+     * 找出当前向量中最大元素
+     * @return
+     */
+    int max();
 
     /**
      * 找出low和high的最大的元素

@@ -102,8 +102,34 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
         oldElements = null;
     }
 
+    /**
+     * 对当前元素进行缩容
+     */
     @Override
     public void shrink() {
+
+        if (this.size < DEFAULT_CAPACITY << 1) {
+            //如果容量小于默认大小的两倍，不需要缩小
+            return;
+        }
+        if (this.size << 2 > this.capacity) {
+            //如果size超过了容量的　25％　,比修阿婆缩容
+            return;
+        }
+        //这个时候缩小容量为原来的半
+        Object[] oldElements = this.elements;
+        this.elements = new Object[this.capacity >>= 1];
+        for (int i = 0; i < this.size; i++) {
+            this.elements[i] = oldElements[i];
+        }
+        oldElements = null;
+    }
+
+    @Override
+    public T get(int r) {
+
+        assertTrue(r >= 0 && r < this.size, () -> "非法参数");
+        return (T) this.elements[r];
 
     }
 
@@ -118,8 +144,23 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
     }
 
     @Override
+    public int max() {
+
+        return max(0, this.size);
+    }
+
+    @Override
     public int max(int low, int high) {
-        return 0;
+
+        //找出向量中最大元素的位置
+        checkSection(low, high);
+        int maxRank = low;
+        while (++low < high) {
+            if (((T) this.elements[maxRank]).compareTo((T) this.elements[low]) < 0) {
+                maxRank = low;
+            }
+        }
+        return maxRank;
     }
 
     @Override
@@ -220,6 +261,7 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
         for (int i = high; i < size; i++) {
             this.elements[low++] = this.elements[i];
         }
+        shrink();
         return (high - low);
     }
 
@@ -279,8 +321,9 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
     /**
      * 将一个无序向量中相同的元素给去掉。
      * 不排序。这种时间消耗是　n^2
-     *
+     * <p>
      * 从后向前进行去重
+     *
      * @return
      */
     @Override
@@ -309,7 +352,8 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
     /**
      * 以从第一个元素开始，依次和后面的元素进行比较，如果后面有和这个元素相同的，就删除后面的元素。
      * 这种实现方式是以第０个元素依次和后面的元素进行匹配
-     *  从前向后去重
+     * 从前向后去重
+     *
      * @return
      */
     public int deduplicateV2() {
