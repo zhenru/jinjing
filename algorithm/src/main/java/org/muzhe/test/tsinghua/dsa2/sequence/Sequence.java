@@ -6,14 +6,6 @@ package org.muzhe.test.tsinghua.dsa2.sequence;
 public  interface Sequence<T extends Comparable<T>> {
 
     /**
-     * 将　low到high 中的元素copy到当前系统中
-     * @param  sequence
-     * @param low
-     * @param high
-     */
-    void copyFrom(Sequence sequence, int low, int high);
-
-    /**
      * 对当前向量进行扩容
      */
     void expand();
