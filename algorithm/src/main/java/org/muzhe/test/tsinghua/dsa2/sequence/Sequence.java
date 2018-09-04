@@ -16,12 +16,27 @@ public  interface Sequence<T extends Comparable<T>> {
     void shrink();
 
     /**
+     * 对　[low,high)区间的元素进行一次冒泡
+     * 冒泡是指将当前元素一路交换，将最大的那个曾到high的位置上，其中high后面的元素是有序元素
+     * @param low
+     * @param high
+     */
+    void baseBubble(int low, int high);
+    /**
      * 对low到high空间进行一次　扫描交换
      * @param low
      * @param high
-     * @return
+     * @return          返回当前数组是否有序
      */
     boolean bubble(int low, int high);
+
+    /**
+     * 对[low,high)区间的元素进行一次冒泡实现
+     * @param low
+     * @param high
+     * @return      返回有序的最后一个的位置
+     */
+    int bubbleFast(int low , int high);
 
     /**
      * 获取　秩＝r位置上的元素
@@ -31,12 +46,28 @@ public  interface Sequence<T extends Comparable<T>> {
     T get(int r);
 
     /**
-     *冒泡排序
+     *调用bubble实现的冒泡排序
      * @param low
      * @param high
      * @return
      */
-    boolean bubbleSort(int low ,int high);
+    void bubbleSort(int low ,int high);
+
+    /**
+     * 调用baseBubble实现的排序
+     * @param low
+     * @param high
+     * @return
+     */
+    void baseBubbleSort(int low ,int high);
+
+    /**
+     * 调用bubbleFast的冒泡排序
+     * @param low
+     * @param high
+     * @return
+     */
+    void fastBubbleSort(int low,int high);
 
     /**
      * 找出当前向量中最大元素

@@ -134,13 +134,85 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
     }
 
     @Override
+    public void baseBubble(int low, int high) {
+
+        checkSection(low, high);
+        while (low < high - 1) {
+            if (((T) this.elements[low]).compareTo((T) this.elements[low + 1]) > 0) {
+                swap(low, low + 1);
+            }
+            low++;
+        }
+
+    }
+
+    /**
+     * 通过一次交换，将[low,high)中最大的元素写到high-1的位置上
+     *
+     * @param low
+     * @param high
+     * @return
+     */
+    @Override
     public boolean bubble(int low, int high) {
-        return false;
+
+        checkSection(low, high);
+        boolean isSort = true;
+        while (low < high - 1) {
+            if (((T) this.elements[low]).compareTo((T) this.elements[low + 1]) > 0) {
+                isSort = false;
+                swap(low, low + 1);
+            }
+            low++;
+        }
+
+        return isSort;
+    }
+
+    /**
+     * bubble中每一次交换都是解决逆序，如果没有交换，就没有逆序。证明后面的都是有序的。
+     * 那么最后一次交换的后面一个位置[low+1,high)都是有序的。这个时候我们可以做的是交换当亲啊的元素
+     *
+     * @param low
+     * @param high
+     * @return
+     */
+    @Override
+    public int bubbleFast(int low, int high) {
+
+        checkSection(low, high);
+        int startSorted = low;
+        while (low < high - 1) {
+            if (((T) this.elements[low]).compareTo((T) this.elements[low + 1]) > 0) {
+                swap(low, low + 1);
+                startSorted = low + 1;
+            }
+            low++;
+        }
+        return startSorted;
     }
 
     @Override
-    public boolean bubbleSort(int low, int high) {
-        return false;
+    public void bubbleSort(int low, int high) {
+        checkSection(low, high);
+        while (!bubble(low, high--)) {
+        }
+    }
+
+    @Override
+    public void baseBubbleSort(int low, int high) {
+        checkSection(low, high);
+        while (low < high) {
+            baseBubble(low, high--);
+        }
+    }
+
+    @Override
+    public void fastBubbleSort(int low, int high) {
+
+        checkSection(low, high);
+        while (low < bubbleFast(low, high--)) {
+        }
     }
 
     @Override
@@ -393,6 +465,21 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
 
     private void checkSection(int low, int high) {
         assertTrue(low >= 0 && low < high && high <= size, () -> "参数不合法");
+    }
+
+
+    /**
+     * 交换　firstRank和secondRank上的数值
+     *
+     * @param firstRank  第一个数的rank
+     * @param secondRank 第二个数的rank
+     */
+    private void swap(int firstRank, int secondRank) {
+
+        Object temp = this.elements[firstRank];
+        this.elements[firstRank] = this.elements[secondRank];
+        this.elements[secondRank] = temp;
+
     }
 
 

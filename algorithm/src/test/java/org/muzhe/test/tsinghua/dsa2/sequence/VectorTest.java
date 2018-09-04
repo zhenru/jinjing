@@ -30,11 +30,39 @@ public class VectorTest {
     }
 
     @Test
-    public void bubble() {
+    public void baseBubbleSort() {
+
+        Vector<Integer> vector = generateRandomVector(20);
+        System.out.println(vector);
+        vector.baseBubbleSort(0, vector.size());
+        System.out.println(vector);
     }
 
     @Test
     public void bubbleSort() {
+        Vector<Integer> vector = generateRandomVector(20);
+        System.out.println(vector);
+        vector.bubbleSort(0, vector.size());
+        System.out.println(vector);
+    }
+
+    @Test
+    public void fastBubbleSort() {
+
+        Vector<Integer> vector = generateRandomVector(20);
+        System.out.println(vector);
+        vector.fastBubbleSort(0, vector.size());
+        System.out.println(vector);
+
+    }
+
+    @Test
+    public void fastBubbleSortWithSortedVector(){
+
+        Vector<Integer> vector = generateVector(20);
+        System.out.println(vector);
+        vector.fastBubbleSort(0,vector.size());
+        System.out.println(vector);
     }
 
     @Test
