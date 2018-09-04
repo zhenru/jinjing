@@ -104,6 +104,17 @@ public class VectorTest {
     }
 
     @Test
+    public void binarySearchV1(){
+
+        Vector<Integer> vector = generateRandomVector(2048);
+        System.out.println(vector);
+        vector.mergeSort(0,vector.size());
+        System.out.println(vector);
+        int i = vector.binarySearchV1(37, 0, vector.size());
+        System.out.println(i);
+    }
+
+    @Test
     public void partition() {
     }
 

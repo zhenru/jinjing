@@ -181,6 +181,24 @@ public  interface Sequence<T extends Comparable<T>> {
     int search(T ele, int low, int high);
 
     /**
+     * 使用二分查找　在　[low,high)区间查找ele元素。版本１
+     * @param ele
+     * @param low
+     * @param high
+     * @return
+     */
+    int binarySearchV1(T ele , int low, int high);
+
+    /**
+     * 使用二分查找　在　[low,high)区间查找ele元素。版本2
+     * @param ele
+     * @param low
+     * @param high
+     * @return
+     */
+    int binarySearchV2(T ele , int low, int high);
+
+    /**
      * 删除　秩为r的元素，并返回对应的元素
      * @param r
      * @return

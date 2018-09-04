@@ -202,10 +202,12 @@ public class OrderVector<T extends Comparable> implements Vector<T> {
         return j - i;
     }
 
+    @Override
     public void traverse(Function<T> function) {
 
     }
 
+    @Override
     public void add(T value) {
         expand();
         this.elements[size++] = value;
@@ -231,6 +233,7 @@ public class OrderVector<T extends Comparable> implements Vector<T> {
 
             //element[middle] 比 t 小
             if (((T) this.elements[middle]).compareTo(t) < 0) {
+                //为什么这里用mid会出现死循环
                 low = middle + 1;
             } else if (((T) this.elements[middle]).compareTo(t) > 0) {
                 high = middle;
