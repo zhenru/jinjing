@@ -53,6 +53,7 @@ public class VectorTest {
         System.out.println(vector);
         vector.fastBubbleSort(0, vector.size());
         System.out.println(vector);
+        System.out.println(vector.isAsc(0, vector.size()));
 
     }
 

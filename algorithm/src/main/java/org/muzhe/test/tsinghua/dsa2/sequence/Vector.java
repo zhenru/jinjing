@@ -452,6 +452,41 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
         return 0;
     }
 
+    /**
+     * 判断当前序列是否升序
+     *
+     * @return
+     */
+    @Override
+    public boolean isAsc(int low, int high) {
+
+        while (low < high-1) {
+            if (((T) this.elements[low]).compareTo((T) this.elements[low + 1]) > 0) {
+                return false;
+            }
+            low++;
+        }
+
+        return true;
+    }
+
+    /**
+     * 判断当前向量是否降序
+     *
+     * @return
+     */
+    @Override
+    public boolean isDesc(int low, int high) {
+
+        while (low < high-1) {
+            if (((T) this.elements[low]).compareTo((T) this.elements[low + 1]) < 0) {
+                return false;
+            }
+            low++;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
 

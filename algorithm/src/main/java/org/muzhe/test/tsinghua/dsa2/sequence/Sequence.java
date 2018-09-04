@@ -246,4 +246,20 @@ public  interface Sequence<T extends Comparable<T>> {
      */
     int uniquify();
 
+    /**
+     * [low,high)是否升序
+     * @param low
+     * @param high
+     * @return
+     */
+    boolean isAsc(int low, int high);
+
+    /**
+     * @param low
+     * @param high
+     * 是否降序
+     * @return
+     */
+    boolean isDesc(int low, int high);
+
 }
