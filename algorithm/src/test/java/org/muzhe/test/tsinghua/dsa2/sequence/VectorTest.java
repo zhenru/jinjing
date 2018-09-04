@@ -95,6 +95,12 @@ public class VectorTest {
 
     @Test
     public void mergeSort() {
+        Vector<Integer> vector = generateRandomVector(2048);
+        System.out.println(vector);
+        vector.mergeSort(0 , vector.size());
+        System.out.println(vector);
+        System.out.println(vector.isAsc(0 , vector.size()));
+
     }
 
     @Test

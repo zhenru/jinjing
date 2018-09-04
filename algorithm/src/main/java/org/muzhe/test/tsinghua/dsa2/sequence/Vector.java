@@ -240,13 +240,55 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
 
     }
 
+    /**
+     * 将当前数组中有有序的[low,mid)和[mid,high)进行合并
+     * 这里需要额外的一半空间来存放前半部分的数据
+     *
+     * @param low
+     * @param mid
+     * @param high
+     */
     @Override
     public void merge(int low, int mid, int high) {
+        assertTrue(0 <= low && low <= mid && mid <= high && high <= this.size, () -> "非法参数");
+
+        Object[] leftElements = new Object[mid - low];
+        for (int i = 0, j = low; j < mid; j++) {
+            leftElements[i++] = this.elements[j];
+        }
+
+        //如果a和b两个数组中都有元素，这个循环都需要走下去
+        for (int la = 0, lb = mid, lc = low; la < leftElements.length || lb < high; ) {
+            //将a数组中的元素写到c中去。
+            //a不为空，ｂ为空。 或者ａ，ｂ都不为空，a的元素小于b的元素。
+            if ((la < leftElements.length && lb < high && ((T) leftElements[la]).compareTo((T) this.elements[lb]) < 0) || (la < leftElements.length && lb >= high)) {
+                this.elements[lc++] = leftElements[la++];
+            }
+            //将b数组中的元素写到c中去
+            //a为空b不为空。或者　a,b都不为空，a的元素不小于b的元素。
+            if ((la < leftElements.length && lb < high && !(((T) leftElements[la]).compareTo((T) this.elements[lb]) < 0)) || (la >= leftElements.length && lb < high)) {
+                this.elements[lc++] = this.elements[lb++];
+            }
+        }
+        leftElements = null;
 
     }
 
     @Override
     public void mergeSort(int low, int high) {
+
+        //如果元素个数只有一个则这个数组是有序的。
+        if (high - low < 2) {
+            return;
+        }
+        //选择中点将数组一分为二
+        int mid = (high + low) / 2;
+        //对左边进行排序
+        mergeSort(low, mid);
+        //对右边进行merge排序
+        mergeSort(mid, high);
+        //将两边排好序的数组进行merge起来
+        merge(low, mid, high);
 
     }
 
@@ -460,7 +502,7 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
     @Override
     public boolean isAsc(int low, int high) {
 
-        while (low < high-1) {
+        while (low < high - 1) {
             if (((T) this.elements[low]).compareTo((T) this.elements[low + 1]) > 0) {
                 return false;
             }
@@ -478,7 +520,7 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
     @Override
     public boolean isDesc(int low, int high) {
 
-        while (low < high-1) {
+        while (low < high - 1) {
             if (((T) this.elements[low]).compareTo((T) this.elements[low + 1]) < 0) {
                 return false;
             }
