@@ -58,11 +58,11 @@ public class VectorTest {
     }
 
     @Test
-    public void fastBubbleSortWithSortedVector(){
+    public void fastBubbleSortWithSortedVector() {
 
         Vector<Integer> vector = generateVector(20);
         System.out.println(vector);
-        vector.fastBubbleSort(0,vector.size());
+        vector.fastBubbleSort(0, vector.size());
         System.out.println(vector);
     }
 
@@ -95,23 +95,41 @@ public class VectorTest {
 
     @Test
     public void mergeSort() {
-        Vector<Integer> vector = generateRandomVector(2048);
+        Vector<Integer> vector = generateRandomVector(1024);
         System.out.println(vector);
-        vector.mergeSort(0 , vector.size());
+        vector.mergeSort(0, vector.size());
         System.out.println(vector);
-        System.out.println(vector.isAsc(0 , vector.size()));
+        System.out.println(vector.isAsc(0, vector.size()));
 
     }
 
     @Test
-    public void binarySearchV1(){
+    public void binarySearchV1() {
 
         Vector<Integer> vector = generateRandomVector(2048);
         System.out.println(vector);
-        vector.mergeSort(0,vector.size());
+        vector.mergeSort(0, vector.size());
         System.out.println(vector);
         int i = vector.binarySearchV1(37, 0, vector.size());
         System.out.println(i);
+    }
+
+    @Test
+    public void binarySearchV2() {
+
+        Vector<Integer> vector = generateRandomVector(10);
+        System.out.println(vector);
+        vector.mergeSort(0, vector.size());
+        System.out.println(vector);
+        int i = vector.binarySearchV2(20, 0, vector.size());
+
+        System.out.println(i);
+    }
+
+    @Test
+    public void testMerge(){
+
+
     }
 
     @Test

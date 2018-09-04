@@ -257,18 +257,20 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
         }
 
         //如果a和b两个数组中都有元素，这个循环都需要走下去
-        for (int la = 0, lb = mid, lc = low; la < leftElements.length || lb < high; ) {
-            //将a数组中的元素写到c中去。
-            //a不为空，ｂ为空。 或者ａ，ｂ都不为空，a的元素小于b的元素。
-
-            if ((la < leftElements.length) && ((lb < high && ((T) leftElements[la]).compareTo((T) this.elements[lb]) < 0)) || !(lb < high)) {
+        int la = 0, lb = mid, lc = low;
+        while (la < leftElements.length && lb < high) {
+            if ((compare(leftElements[la], this.elements[lb]) < 0)) {
                 this.elements[lc++] = leftElements[la++];
-            }
-            //将b数组中的元素写到c中去
-            //a为空b不为空。或者　a,b都不为空，a的元素不小于b的元素。
-            if (lb < high && (la < leftElements.length && !(((T) leftElements[la]).compareTo((T) this.elements[lb]) < 0)) || (la >= leftElements.length)) {
+            } else {
                 this.elements[lc++] = this.elements[lb++];
             }
+        }
+
+        while (la < leftElements.length) {
+            this.elements[lc++] = leftElements[la++];
+        }
+        while (lb < high) {
+            this.elements[lc++] = this.elements[lb++];
         }
         leftElements = null;
     }
@@ -350,8 +352,10 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
 
     /**
      * 这个算法的缺点是
-     *      １.如果在有序数组中存在多个元素，这个时候，返回的是这些元素中的哪一个是不确定的
-     *      2.如果不存在简单的返回一个　-1,表示当前元素不存在，没有返回其他的更多数据。
+     * １.如果在有序数组中存在多个元素，这个时候，返回的是这些元素中的哪一个是不确定的
+     * 2.如果不存在简单的返回一个　-1,表示当前元素不存在，没有返回其他的更多数据。
+     * 优点：
+     * 1.当查找结束的时候能第一时间跳出查找
      *
      * @param ele
      * @param low
@@ -366,9 +370,9 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
 
         while (low < high) {
             int mid = (low + high) >> 1;
-            if (compare(this.elements[mid] ,ele) > 0) {
+            if (compare(this.elements[mid], ele) > 0) {
                 high = mid;
-            } else if (compare(this.elements[mid] , ele) < 0) {
+            } else if (compare(this.elements[mid], ele) < 0) {
                 //这里一定要用　mid+1.如果不用mid+1可能会出现的问题是死循环。而且会有重复比较的问题。
                 low = mid + 1;
             } else {
@@ -382,7 +386,19 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
     @Override
     public int binarySearchV2(T ele, int low, int high) {
 
-        return -1;
+        checkSection(low, high);
+        while (high - low > 1) {
+
+            int mid = (high + low) >> 1;
+            if (0 < compare(ele, this.elements[mid])) {
+                // [mid,high)
+                low = mid;
+            } else {
+                //[low,mid)
+                high = mid;
+            }
+        }
+        return low;
     }
 
     /**
