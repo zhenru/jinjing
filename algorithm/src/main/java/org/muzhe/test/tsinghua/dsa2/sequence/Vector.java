@@ -261,12 +261,13 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
         for (int la = 0, lb = mid, lc = low; la < leftElements.length || lb < high; ) {
             //将a数组中的元素写到c中去。
             //a不为空，ｂ为空。 或者ａ，ｂ都不为空，a的元素小于b的元素。
-            if ((la < leftElements.length && lb < high && ((T) leftElements[la]).compareTo((T) this.elements[lb]) < 0) || (la < leftElements.length && lb >= high)) {
+
+            if ((la< leftElements.length)&&((lb<high &&((T) leftElements[la]).compareTo((T) this.elements[lb]) < 0))||!(lb< high)) {
                 this.elements[lc++] = leftElements[la++];
             }
             //将b数组中的元素写到c中去
             //a为空b不为空。或者　a,b都不为空，a的元素不小于b的元素。
-            if ((la < leftElements.length && lb < high && !(((T) leftElements[la]).compareTo((T) this.elements[lb]) < 0)) || (la >= leftElements.length && lb < high)) {
+            if (lb < high &&(la < leftElements.length &&  !(((T) leftElements[la]).compareTo((T) this.elements[lb]) < 0)) || (la >= leftElements.length)) {
                 this.elements[lc++] = this.elements[lb++];
             }
         }
