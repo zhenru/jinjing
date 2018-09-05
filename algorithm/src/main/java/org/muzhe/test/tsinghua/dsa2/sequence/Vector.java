@@ -2,6 +2,7 @@ package org.muzhe.test.tsinghua.dsa2.sequence;
 
 import com.sun.org.glassfish.gmbal.ManagedObject;
 import lombok.ToString;
+import org.junit.Test;
 
 import static org.muzhe.test.tsinghua.dsa2.sequence.Assert.assertTrue;
 
@@ -398,7 +399,6 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
         //这里为什么使用　high - low >1 ;这个是为什么呢？
         while (high - low > 1) {
 
-
             int mid = (high + low) >> 1;
             //这里使用的比较会有那些后果？
             if (compare(ele, this.elements[mid]) < 0) {
@@ -410,22 +410,42 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
             }
 
         }
+        System.out.println("low = " + low + " high = " + high);
         return low;
     }
 
     @Override
     public int binarySearchV3(T ele, int low, int high) {
 
+        //这里应该是　low < high区间
         while (low < high) {
+            //取中点
             int mid = (high + low) >> 1;
+            //在这个过程中　elements[mid]是被忽略掉的。这个是如何实现的？
             if (compare(ele, this.elements[mid]) < 0) {
+                //如果　ele < elements[mid].区间就变为　[low,mid)
                 //[low,mid)
+                high = mid;
+            } else {
+                //如果　ele>= elements[mid],区间就变为　[mid+1 , high)
+                low = mid + 1;
+            }
+        }
+        return --low;
+    }
+
+    @Override
+    public int binarySearchV4(T ele, int low, int high) {
+
+        while (low < high) {
+            int mid = (low + high) >> 1;
+
+            if (compare(ele, this.elements[mid]) < 0) {
                 high = mid;
             } else {
                 low = mid + 1;
             }
         }
-
         return --low;
     }
 

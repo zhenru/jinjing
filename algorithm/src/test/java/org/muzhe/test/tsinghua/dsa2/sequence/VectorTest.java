@@ -130,7 +130,7 @@ public class VectorTest {
     @Test
     public void binarySearchV22() {
 
-        Vector<Integer> vector = generateSameVector(20,12);
+        Vector<Integer> vector = generateSameVector(20, 12);
         System.out.println(vector);
         int index = vector.binarySearchV2(20, 0, vector.size());
         System.out.println(index);
@@ -138,20 +138,18 @@ public class VectorTest {
     }
 
     @Test
-    public void binarySearchV3(){
+    public void binarySearchV3() {
 
         Vector<Integer> vector = generateRandomVector(1023);
         System.out.println(vector);
-        vector.mergeSort(0,vector.size());
+        vector.mergeSort(0, vector.size());
         System.out.println(vector);
 
-        int index = vector.binarySearchV3(1, 0, vector.size());
+        int index = vector.binarySearchV4(10, 0, vector.size());
         System.out.println(index);
         System.out.println(vector.get(index));
 
-
     }
-
 
 
     @Test
@@ -369,7 +367,6 @@ public class VectorTest {
     }
 
     /**
-     *
      * @param numCount
      * @return
      */

@@ -209,6 +209,15 @@ public  interface Sequence<T extends Comparable<T>> {
     int binarySearchV3(T ele , int low ,int high);
 
     /**
+     * 二分查找。这里查找出不大于当前元素
+     * @param ele
+     * @param low
+     * @param high
+     * @return
+     */
+    int binarySearchV4(T ele,int low , int high);
+
+    /**
      * 删除　秩为r的元素，并返回对应的元素
      * @param r
      * @return
