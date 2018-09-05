@@ -117,17 +117,45 @@ public class VectorTest {
     @Test
     public void binarySearchV2() {
 
-        Vector<Integer> vector = generateRandomVector(10);
+        Vector<Integer> vector = generateRandomVector(32);
         System.out.println(vector);
         vector.mergeSort(0, vector.size());
         System.out.println(vector);
-        int i = vector.binarySearchV2(20, 0, vector.size());
+        int i = vector.binarySearchV2(60, 0, vector.size());
 
         System.out.println(i);
+        System.out.println(vector.get(i));
     }
 
     @Test
-    public void testMerge(){
+    public void binarySearchV22() {
+
+        Vector<Integer> vector = generateSameVector(20,12);
+        System.out.println(vector);
+        int index = vector.binarySearchV2(20, 0, vector.size());
+        System.out.println(index);
+        System.out.println(vector.get(index));
+    }
+
+    @Test
+    public void binarySearchV3(){
+
+        Vector<Integer> vector = generateRandomVector(1023);
+        System.out.println(vector);
+        vector.mergeSort(0,vector.size());
+        System.out.println(vector);
+
+        int index = vector.binarySearchV3(1, 0, vector.size());
+        System.out.println(index);
+        System.out.println(vector.get(index));
+
+
+    }
+
+
+
+    @Test
+    public void testMerge() {
 
 
     }
@@ -336,6 +364,21 @@ public class VectorTest {
             } else {
                 vector.insert(i);
             }
+        }
+        return vector;
+    }
+
+    /**
+     *
+     * @param numCount
+     * @return
+     */
+    private Vector<Integer> generateSameVector(int numCount, int element) {
+
+        Vector<Integer> vector = new Vector<>(numCount);
+        for (int i = 0; i < numCount; i++) {
+
+            vector.insert(element);
         }
         return vector;
     }

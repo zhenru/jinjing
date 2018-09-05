@@ -199,6 +199,16 @@ public  interface Sequence<T extends Comparable<T>> {
     int binarySearchV2(T ele , int low, int high);
 
     /**
+     * 使用二分查找，　在　[low,high)区间查找ele元素。版本３
+     *
+     * @param ele
+     * @param low
+     * @param high
+     * @return      不大于ele的最大元素的位置。　这里将区间设置为 (-无穷　, low) [low,high) , [high,+无穷)
+     */
+    int binarySearchV3(T ele , int low ,int high);
+
+    /**
      * 删除　秩为r的元素，并返回对应的元素
      * @param r
      * @return

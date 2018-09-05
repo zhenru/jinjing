@@ -383,23 +383,52 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
         return -1;
     }
 
+    /**
+     * todo 这里需要仔细研究一下的，看下是为什么这样控制数值的走位，这个很关键
+     *
+     * @param ele
+     * @param low
+     * @param high
+     * @return
+     */
     @Override
     public int binarySearchV2(T ele, int low, int high) {
 
         checkSection(low, high);
+        //这里为什么使用　high - low >1 ;这个是为什么呢？
         while (high - low > 1) {
 
+
             int mid = (high + low) >> 1;
-            if (0 < compare(ele, this.elements[mid])) {
+            //这里使用的比较会有那些后果？
+            if (compare(ele, this.elements[mid]) < 0) {
                 // [mid,high)
-                low = mid;
+                high = mid;
             } else {
                 //[low,mid)
-                high = mid;
+                low = mid;
             }
+
         }
         return low;
     }
+
+    @Override
+    public int binarySearchV3(T ele, int low, int high) {
+
+        while (low < high) {
+            int mid = (high + low) >> 1;
+            if (compare(ele, this.elements[mid]) < 0) {
+                //[low,mid)
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        return --low;
+    }
+
 
     /**
      * 删除第r的元素，表示删除[r,r+1)的元素
