@@ -7,9 +7,6 @@ public class Search {
 
     /**
      * 从　elements中　[low,high)区间中查找　最后一个　小于　ele 的元素的位置。
-     * <p>
-     * 在这里　low表示最小的元素，high是比当前数组中最大的元素大一个。
-     * 当到最后的时候，low = high。是low越界限了。所以应该返回的是low-1
      *
      * @param elements
      * @param low
@@ -19,22 +16,21 @@ public class Search {
      */
     public int binarySearchV1(int[] elements, int low, int high, int ele) {
 
-
+        /**
+         * 在结束的时候　low = high
+         */
         while (low < high) {
 
             int mid = (low + high) >> 1;
+
             if (ele <= elements[mid]) {
-                //向左边逼近
+                //mid向左边定位。在最终结束的时候
                 high = mid;
             } else {
-                //向右边逼近
                 low = mid + 1;
             }
-
         }
-
-        System.out.println("low = " + low + " high = " + high);
-        return -1;
+        return --low;
 
     }
 
@@ -49,7 +45,21 @@ public class Search {
      */
     public int binarySearchV2(int[] elements, int low, int high, int ele) {
 
-        return -1;
+        //需要将对应的元素向左边移动
+
+        while (low < high) {
+            int mid = (low + high) >> 1;
+
+            if (ele <= elements[mid]) {
+                //　<--
+                high = mid;
+            } else {
+                //-->
+                low = mid + 1;
+            }
+        }
+
+        return low;
     }
 
     /**
@@ -63,7 +73,18 @@ public class Search {
      */
     public int binarySearchV3(int[] elements, int low, int high, int ele) {
 
-        return -1;
+        //最后一个小于等于ele的元素下标，将元素不断的往右边移动，知道最后一个位置上不大于ele的位置
+        while (low < high) {
+            int mid = (low + high) >> 1;
+            if (ele < elements[mid]) {
+                //元素往左边
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        return --low;
     }
 
     /**
@@ -75,7 +96,16 @@ public class Search {
      */
     public int binarySearchV4(int[] elements, int low, int high, int ele) {
 
-        return -1;
+        while (low < high) {
+            int mid = (low + high) >> 1;
+            if (ele < elements[mid]) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        return low;
     }
 
     /**
@@ -89,7 +119,18 @@ public class Search {
      */
     public int binarySearchV5(int[] elements, int low, int high, int ele) {
 
-        return -1;
+        //找出第一个大于等于ele的元素的位置，然后返回是否相等，如果相等就返回，否则就返回-1
+        while (low < high) {
+            int mid = (low + high) >> 1;
+
+            if (ele <= elements[mid]) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        return low >= elements.length ? -1 : ele == elements[low] ? low : -1;
     }
 
     /**
@@ -103,6 +144,16 @@ public class Search {
      */
     public int binarySearchV6(int[] elements, int low, int high, int ele) {
 
-        return -1;
+        while (low < high) {
+            int mid = (low + high) >> 1;
+
+            if (ele < elements[mid]) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        --low;
+        return low >= elements.length ? -1 : ele == elements[low] ? low : -1;
     }
 }
