@@ -87,6 +87,11 @@ public class VectorTest {
 
     @Test
     public void selectSort() {
+        Vector<Integer> vector = generateRandomVector(1024);
+        System.out.println(vector);
+        vector.selectSort(0, vector.size());
+        System.out.println(vector);
+        System.out.println(vector.isAsc(0, vector.size()));
     }
 
     @Test
@@ -140,13 +145,13 @@ public class VectorTest {
     @Test
     public void binarySearchV3() {
 
-       Vector<Integer> vector = new Vector<>();
-       vector.insert(1);
-       vector.insert(2);
-       vector.insert(2);
-       vector.insert(4);
-       vector.insert(4);
-       vector.insert(4);
+        Vector<Integer> vector = new Vector<>();
+        vector.insert(1);
+        vector.insert(2);
+        vector.insert(2);
+        vector.insert(4);
+        vector.insert(4);
+        vector.insert(4);
         int i = vector.binarySearchV3(3, 0, vector.size());
         System.out.println(vector.get(i));
     }
@@ -160,10 +165,46 @@ public class VectorTest {
 
     @Test
     public void partition() {
+
+        Vector<Integer> vector = generateRandomVector(34);
+        System.out.println(vector);
+        int partition = vector.partition(0, vector.size());
+        System.out.println(vector);
+        System.out.println(partition);
+        System.out.println(vector.get(partition));
+    }
+
+    @Test
+    public void partition2() {
+
+        Vector<Integer> vector = generateRandomVector(34);
+        System.out.println(vector);
+        int partition = vector.partition2(0, vector.size());
+        System.out.println(vector);
+        System.out.println(partition);
+        System.out.println(vector.get(partition));
+    }
+
+    @Test
+    public void partition3() {
+
+        Vector<Integer> vector = generateRandomVector(34);
+        System.out.println(vector);
+        int partition3 = vector.partition3(0, vector.size());
+        System.out.println(vector);
+        System.out.println(partition3);
+        System.out.println(vector.get(partition3));
     }
 
     @Test
     public void quickSort() {
+
+        Vector<Integer> vector = generateRandomVector(2048);
+        System.out.println(vector);
+        vector.quickSort(0, vector.size());
+        System.out.println(vector);
+        System.out.println(vector.isAsc(0, vector.size()));
+
     }
 
     @Test
@@ -353,15 +394,7 @@ public class VectorTest {
 
         Vector<Integer> vector = new Vector<>();
         for (int i = 0; i < count; i++) {
-            if (i % 2 == 0) {
-                vector.insert(i * 5 + 1);
-            } else if (i % 2 == 0) {
-                vector.insert(i * 3 + 7);
-            } else if (i % 5 == 0) {
-                vector.insert(i * 2 + 1);
-            } else {
-                vector.insert(i);
-            }
+            vector.insert((int) (Math.random() * 300));
         }
         return vector;
     }

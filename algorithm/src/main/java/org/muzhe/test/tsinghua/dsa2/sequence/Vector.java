@@ -237,8 +237,30 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
 
     @Override
     public void selectSort(int low, int high) {
-
+        checkSection(low, high);
+        //[low.high]将[low,high)中最大元素选出来，写到最后一位上
+        while (low < --high) {
+            swap(max2(low, high), high);
+        }
     }
+
+    /**
+     * 对[low,high]上的中找出最大的。
+     *
+     * @param low
+     * @param high
+     * @return
+     */
+    private int max2(int low, int high) {
+        int maxR = high;
+        while (--high >= low) {
+            if (compare(this.elements[maxR], this.elements[high]) < 0) {
+                maxR = high;
+            }
+        }
+        return maxR;
+    }
+
 
     /**
      * 将当前数组中有有序的[low,mid)和[mid,high)进行合并
@@ -296,12 +318,101 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
 
     @Override
     public int partition(int low, int high) {
-        return 0;
+        //选择low指定的元素作为轴点，然后将当前的数组分为两部分
+
+        swap(low, (int) (low + Math.random() * (high - low)));
+        Object pivot = this.elements[low];
+        while (low < high) {
+            //由于是　[low,high)，所以需要先high--，使指向正常的元素。
+            high--;
+            //从high开始找，找到第一个<= pivot的元素
+            while ((low < high) && compare(pivot, this.elements[high]) < 0) {
+                high--;
+            }
+            //将找到的元素写到low指定的位置上。
+            this.elements[low] = this.elements[high];
+
+            //从low开始找，找到第一个　> pivot的元素
+            while ((low < high) && compare(pivot, this.elements[low]) >= 0) {
+                low++;
+            }
+            //将知道的对应的元素填到　high的位置上去。
+            this.elements[high] = this.elements[low];
+        }//low = high
+        //在结束的时候，high = low，就是我们需要的轴点
+
+        this.elements[low] = pivot;
+        return low;
+    }
+
+    /**
+     * 对基础的进行优化
+     *
+     * @param low
+     * @param high
+     * @return
+     */
+    @Override
+    public int partition2(int low, int high) {
+
+        high--;
+        swap(low, (int) (low + Math.random() * (high - low)));
+
+        Object pivot = this.elements[low];
+
+        while (low < high) {
+
+            while (low < high) {
+                if (compare(pivot, this.elements[high]) < 0) {
+                    high--;
+                } else {
+                    this.elements[low++] = this.elements[high];
+                    break;
+                }
+            }
+            while (low < high) {
+                if (compare(pivot, this.elements[low]) >= 0) {
+                    low++;
+                } else {
+                    this.elements[high--] = this.elements[low];
+                    break;
+                }
+            }
+        }
+        this.elements[low] = pivot;
+        return low;
+    }
+
+    /**
+     * 将　low和high区间的元素选中一个随机元素进行为轴一份为２，前半部分小于轴点，后半部分大于　轴点
+     *
+     * @param low
+     * @param high
+     * @return　　轴点位置
+     */
+    public int partition3(int low, int high) {
+
+        swap(low, ((int) (low + (high - low) * Math.random())));
+        int mi = low;
+
+        for (int i = low + 1; i < high; i++) {
+            if (compare(this.elements[i], this.elements[low]) < 0) {
+                swap(++mi, i);
+            }
+        }
+        swap(mi, low);
+        return mi;
     }
 
     @Override
     public void quickSort(int low, int high) {
 
+        if (high <= low) {
+            return;
+        }
+        int partition3 = partition3(low, high);
+        quickSort(low, partition3);
+        quickSort(partition3 + 1, high);
     }
 
     @Override
@@ -437,6 +548,8 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
         return --low;
 
     }
+
+
 
 
     /**

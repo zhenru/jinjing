@@ -106,12 +106,20 @@ public  interface Sequence<T extends Comparable<T>> {
     void mergeSort(int low ,int high);
 
     /**
-     * 轴点构造算法
+     * 对[low,high)将这个区间的数据分为两段，然后返回对应的轴点的rank
      * @param low
      * @param high
      * @return
      */
     int partition(int low ,int high);
+
+    /**
+     * [low,high)将这个区间分为两段，然后返回对应轴点的rank.
+     * @param low
+     * @param high
+     * @return
+     */
+    int partition2(int low , int high);
 
     /**
      * 快速排序
@@ -276,6 +284,7 @@ public  interface Sequence<T extends Comparable<T>> {
      * @return
      */
     int uniquify();
+
 
     /**
      * [low,high)是否升序
