@@ -191,6 +191,7 @@ public  interface Sequence<T extends Comparable<T>> {
 
     /**
      * 使用二分查找　在　[low,high)区间查找ele元素。版本2
+     * 找到当前数组中不大于ele元素的最后一个位置
      * @param ele
      * @param low
      * @param high
@@ -200,6 +201,7 @@ public  interface Sequence<T extends Comparable<T>> {
 
     /**
      * 使用二分查找，　在　[low,high)区间查找ele元素。版本３
+     * 找到当前数组小于第一个小于等于ele元素的位置
      *
      * @param ele
      * @param low
@@ -208,14 +210,6 @@ public  interface Sequence<T extends Comparable<T>> {
      */
     int binarySearchV3(T ele , int low ,int high);
 
-    /**
-     * 二分查找。这里查找出不大于当前元素
-     * @param ele
-     * @param low
-     * @param high
-     * @return
-     */
-    int binarySearchV4(T ele,int low , int high);
 
     /**
      * 删除　秩为r的元素，并返回对应的元素

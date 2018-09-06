@@ -117,11 +117,11 @@ public class VectorTest {
     @Test
     public void binarySearchV2() {
 
-        Vector<Integer> vector = generateRandomVector(32);
+        Vector<Integer> vector = generateRandomVector(10);
         System.out.println(vector);
         vector.mergeSort(0, vector.size());
         System.out.println(vector);
-        int i = vector.binarySearchV2(60, 0, vector.size());
+        int i = vector.binarySearchV2(-1, 0, vector.size());
 
         System.out.println(i);
         System.out.println(vector.get(i));
@@ -140,15 +140,15 @@ public class VectorTest {
     @Test
     public void binarySearchV3() {
 
-        Vector<Integer> vector = generateRandomVector(1023);
-        System.out.println(vector);
-        vector.mergeSort(0, vector.size());
-        System.out.println(vector);
-
-        int index = vector.binarySearchV4(10, 0, vector.size());
-        System.out.println(index);
-        System.out.println(vector.get(index));
-
+       Vector<Integer> vector = new Vector<>();
+       vector.insert(1);
+       vector.insert(2);
+       vector.insert(2);
+       vector.insert(4);
+       vector.insert(4);
+       vector.insert(4);
+        int i = vector.binarySearchV3(3, 0, vector.size());
+        System.out.println(vector.get(i));
     }
 
 

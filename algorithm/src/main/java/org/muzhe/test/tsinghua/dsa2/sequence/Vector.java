@@ -386,6 +386,8 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
 
     /**
      * todo 这里需要仔细研究一下的，看下是为什么这样控制数值的走位，这个很关键
+     * 找到当前数组中不大于ele元素的最后一个位置
+     * 就是大于　ele的第一个元素的前一个元素
      *
      * @param ele
      * @param low
@@ -396,57 +398,44 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
     public int binarySearchV2(T ele, int low, int high) {
 
         checkSection(low, high);
-        //这里为什么使用　high - low >1 ;这个是为什么呢？
-        while (high - low > 1) {
-
-            int mid = (high + low) >> 1;
-            //这里使用的比较会有那些后果？
-            if (compare(ele, this.elements[mid]) < 0) {
-                // [mid,high)
-                high = mid;
-            } else {
-                //[low,mid)
-                low = mid;
-            }
-
-        }
-        System.out.println("low = " + low + " high = " + high);
-        return low;
-    }
-
-    @Override
-    public int binarySearchV3(T ele, int low, int high) {
-
-        //这里应该是　low < high区间
-        while (low < high) {
-            //取中点
-            int mid = (high + low) >> 1;
-            //在这个过程中　elements[mid]是被忽略掉的。这个是如何实现的？
-            if (compare(ele, this.elements[mid]) < 0) {
-                //如果　ele < elements[mid].区间就变为　[low,mid)
-                //[low,mid)
-                high = mid;
-            } else {
-                //如果　ele>= elements[mid],区间就变为　[mid+1 , high)
-                low = mid + 1;
-            }
-        }
-        return --low;
-    }
-
-    @Override
-    public int binarySearchV4(T ele, int low, int high) {
 
         while (low < high) {
             int mid = (low + high) >> 1;
-
             if (compare(ele, this.elements[mid]) < 0) {
                 high = mid;
             } else {
                 low = mid + 1;
             }
         }
+
         return --low;
+    }
+
+    /**
+     * 找到当前数组第一个小于ele元素的位置
+     *
+     * @param ele
+     * @param low
+     * @param high
+     * @return
+     */
+    @Override
+    public int binarySearchV3(T ele, int low, int high) {
+        checkSection(low, high);
+
+        while (low < high) {
+
+            int mid = (low + high) >> 1;
+            if (compare(ele, this.elements[mid]) <= 0) {
+                high = mid;
+            } else {
+                // ele > mid
+                low = mid + 1;
+            }
+        }
+
+        return --low;
+
     }
 
 
