@@ -347,7 +347,24 @@ public class VectorTest {
 
 
     @Test
-    public void uniquify() {
+    public void uniquify_slow() {
+
+        Vector<Integer> vector = generateDuplicateIntegerVector(5);
+        System.out.println(vector);
+        int i = vector.uniquify_slow();
+        System.out.println(vector);
+        System.out.println(i);
+
+    }
+
+    @Test
+    public void uniquify_fast(){
+
+        Vector<Integer> vector = generateDuplicateIntegerVector(50);
+        System.out.println(vector);
+        int i = vector.uniquify_fast();
+        System.out.println(vector);
+        System.out.println(i);
     }
 
     private Vector<Integer> generateVector() {
@@ -381,6 +398,20 @@ public class VectorTest {
             vector.insert(i + 1);
         }
         return vector;
+
+    }
+
+    @Test
+    public void remove2(){
+
+        Vector<Integer> vector = new Vector<>(4);
+        vector.insert(1);
+        vector.insert(2);
+        vector.insert(3);
+        vector.insert(4);
+        System.out.println(vector);
+        int remove = vector.remove(3, 4);
+        System.out.println(vector);
 
     }
 

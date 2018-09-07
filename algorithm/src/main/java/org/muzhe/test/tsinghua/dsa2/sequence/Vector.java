@@ -550,8 +550,6 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
     }
 
 
-
-
     /**
      * 删除第r的元素，表示删除[r,r+1)的元素
      *
@@ -568,6 +566,10 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
 
     /**
      * 删除[low,high)区间的元素，主要是把 [0,size) ->[0,low)+[high,size) 的元素
+     * 在代码的时候需要考虑当前系统中那些变量是　变化的。如果一些变量会不断变化，需要copy下数据在某个时间点上的值。
+     * 数据是有时间点概念的。
+     * <p>
+     * 这里就更好了。
      *
      * @param low
      * @param high
@@ -576,10 +578,10 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
     @Override
     public int remove(int low, int high) {
         checkSection(low, high);
-        this.size = this.size + low - high;
-        for (int i = high; i < size; i++) {
-            this.elements[low++] = this.elements[i];
+        while (high < size) {
+            this.elements[low++] = this.elements[high++];
         }
+        this.size = low;
         shrink();
         return (high - low);
     }
@@ -695,8 +697,43 @@ public class Vector<T extends Comparable<T>> implements Sequence<T> {
     }
 
     @Override
-    public int uniquify() {
-        return 0;
+    public int uniquify_slow() {
+
+        int oldSize = this.size;
+        int i = 1;
+        //在remove的过程中size的值也会变化的
+        while (i < size) {
+            if (compare(this.elements[i - 1], this.elements[i]) == 0) {
+                remove(i);
+            } else {
+                i++;
+            }
+        }
+        return oldSize - size;
+
+    }
+
+    /**
+     * 使用　和　remove相似的手法，主要的实现方式是：
+     * 和前面相同的路过，和前面不同的删除。
+     * 从１开始，i指向当前元素的下标。
+     * j指向size.
+     *
+     * @return
+     */
+    @Override
+    public int uniquify_fast() {
+
+        //使用两个指针，一个是去重后的指针，一个是去重前的指针
+        //两个开始的位置是　去重后的指针　指向０，去重前的指针指向１。原因是
+        int i = 0, j = 0;
+        while (++j < this.size) {
+            if (compare(this.elements[j - 1], this.elements[j]) != 0) {
+                this.elements[++i] = this.elements[j];
+            }
+        }
+        this.size = i++;
+        return j - i;
     }
 
     /**

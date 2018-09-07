@@ -280,10 +280,16 @@ public  interface Sequence<T extends Comparable<T>> {
     int deduplicate();
 
     /**
-     * 无序去重
+     * 有序去重(低效)
      * @return
      */
-    int uniquify();
+    int uniquify_slow();
+
+    /**
+     * 有序去重(高效)
+     * @return
+     */
+    int uniquify_fast();
 
 
     /**
