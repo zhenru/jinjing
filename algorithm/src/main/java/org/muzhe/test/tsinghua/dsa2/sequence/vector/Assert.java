@@ -1,4 +1,4 @@
-package org.muzhe.test.tsinghua.dsa2.sequence;
+package org.muzhe.test.tsinghua.dsa2.sequence.vector;
 
 
 import java.util.function.Supplier;

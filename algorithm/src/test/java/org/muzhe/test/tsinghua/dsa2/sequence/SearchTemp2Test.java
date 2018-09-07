@@ -1,6 +1,7 @@
 package org.muzhe.test.tsinghua.dsa2.sequence;
 
 import org.junit.Test;
+import org.muzhe.test.tsinghua.dsa2.sequence.vector.SearchTemp2;
 
 import static org.junit.Assert.*;
 

@@ -1,8 +1,7 @@
 package org.muzhe.test.tsinghua.dsa2.sequence;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import org.muzhe.test.tsinghua.dsa2.sequence.vector.Search;
 
 /**
  * @author muzhe-wang on  18-9-5 下午2:33.

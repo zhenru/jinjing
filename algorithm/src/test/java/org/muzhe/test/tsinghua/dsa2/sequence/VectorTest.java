@@ -1,8 +1,9 @@
 package org.muzhe.test.tsinghua.dsa2.sequence;
 
 import org.junit.Test;
+import org.muzhe.test.tsinghua.dsa2.sequence.vector.Vector;
 
-import static org.muzhe.test.tsinghua.dsa2.sequence.Assert.assertTrue;
+import static org.muzhe.test.tsinghua.dsa2.sequence.vector.Assert.assertTrue;
 
 /**
  * @author muzhe-wang on  18-9-3 下午3:33.

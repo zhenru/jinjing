@@ -1,10 +1,6 @@
-package org.muzhe.test.tsinghua.dsa2.sequence;
+package org.muzhe.test.tsinghua.dsa2.sequence.vector;
 
-import com.sun.org.glassfish.gmbal.ManagedObject;
-import lombok.ToString;
-import org.junit.Test;
-
-import static org.muzhe.test.tsinghua.dsa2.sequence.Assert.assertTrue;
+import static org.muzhe.test.tsinghua.dsa2.sequence.vector.Assert.assertTrue;
 
 /**
  * 向量

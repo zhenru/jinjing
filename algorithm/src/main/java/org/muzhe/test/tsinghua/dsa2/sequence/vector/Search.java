@@ -1,4 +1,4 @@
-package org.muzhe.test.tsinghua.dsa2.sequence;
+package org.muzhe.test.tsinghua.dsa2.sequence.vector;
 
 /**
  * @author muzhe-wang on  18-9-5 下午2:08.
