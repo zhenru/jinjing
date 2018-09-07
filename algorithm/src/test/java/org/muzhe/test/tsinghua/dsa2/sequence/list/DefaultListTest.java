@@ -66,7 +66,7 @@ public class DefaultListTest {
     @Test
     public void find() {
 
-        for (int i = 0 ; i<=20 ; i++){
+        for (int i = 0; i <= 20; i++) {
             defaultList.insertAsLast(i);
         }
 
@@ -117,8 +117,8 @@ public class DefaultListTest {
     @Test
     public void insertAsLast() {
 
-        for(int i = 0 ; i < 20 ;i++){
-            defaultList.insertAsLast(i+1);
+        for (int i = 0; i < 20; i++) {
+            defaultList.insertAsLast(i + 1);
         }
         System.out.println(defaultList);
     }
@@ -134,6 +134,15 @@ public class DefaultListTest {
 
     @Test
     public void remove() {
+
+        for (int i = 0; i < 20; i++) {
+            defaultList.insertAsLast(i + 1);
+        }
+        System.out.println(defaultList);
+        ListNode<Integer> integerListNode = defaultList.find(12);
+        defaultList.remove(integerListNode);
+        System.out.println(defaultList);
+
     }
 
     @Test
@@ -150,6 +159,15 @@ public class DefaultListTest {
 
     @Test
     public void duplicate() {
+        for (int i = 0 ; i< 2 ; i++){
+            defaultList.insertAsLast(12);
+        }
+
+        System.out.println(defaultList);
+        int duplicate = defaultList.duplicate();
+        System.out.println(duplicate);
+        System.out.println(defaultList);
+
     }
 
     @Test

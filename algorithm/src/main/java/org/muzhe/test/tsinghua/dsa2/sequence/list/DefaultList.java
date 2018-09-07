@@ -167,7 +167,15 @@ public class DefaultList<T> implements List<T> {
 
     @Override
     public T remove(ListNode<T> node) {
-        return null;
+
+        T data = node.getData();
+        ListNode<T> pre = node.getPred();
+        ListNode<T> succ = node.getSucc();
+        pre.setSucc(succ);
+        succ.setPred(pre);
+        this.size--;
+        node = null;
+        return data;
     }
 
     @Override
@@ -187,7 +195,20 @@ public class DefaultList<T> implements List<T> {
 
     @Override
     public int duplicate() {
-        return 0;
+
+        //无序list中删除相同的元素。
+        //从第一个元素开始和后面的元素依次进行比较，如果相同，就删除后面相同的那个元素。
+        int oldSize = this.size;
+        for (ListNode<T> p = head.getSucc(); p != tail; p = p.getSucc()) {
+            for (ListNode<T> q = p; q.getSucc() != tail; q = q.getSucc()) {
+                if (q.getSucc().getData().equals(p.getData())) {
+                    remove(q.getSucc());
+                }
+            }
+        }
+        //todo 这里有问题需要重新实现一下 muzhe
+        return oldSize - size;
+
     }
 
     @Override
