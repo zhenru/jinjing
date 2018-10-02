@@ -13,16 +13,7 @@
         <module>hystrix</module>
         <module>spi</module>
         <module>spi-api</module>
-        <module>dubbo-parise</module>
-        <module>dubbo-parise-sample</module>
-        <module>log-demo</module>
         <module>logShow</module>
-        <module>dubbo-test-api</module>
-        <module>dubbo-test-server</module>
-        <module>dubbo-test-server2</module>
-        <module>dubbo-test-client</module>
-        <module>dubbo-log-web-test</module>
-        <module>webtest</module>
         <module>algorithm</module>
         <module>dp</module>
         <module>gc</module>
